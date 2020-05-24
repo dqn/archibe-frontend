@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server --open",
+    "build": "NODE_ENV=production webpack --mode=production",
+    "format": "prettier 'src/**/*.{js,jsx,ts,tsx}' --write"
+  },
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
