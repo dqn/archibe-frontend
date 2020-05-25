@@ -2,23 +2,21 @@ import React from 'react';
 
 import ModeratorIcon from '@/assets/moderator.svg';
 
-type Chat = ChatElement[];
+type MessageElement = MessageElementText | MessageElementEmoji;
 
-type ChatElement = ChatElementText | ChatElementEmoji;
-
-type ChatElementText = {
+type MessageElementText = {
   type: 'text';
   text: string;
 };
 
-type ChatElementEmoji = {
+type MessageElementEmoji = {
   type: 'emoji';
   label: string;
   url: string;
 };
 
 export const ChannelDetails: React.FC = () => {
-  const chats: Chat[] = [
+  const chats: MessageElement[][] = [
     [
       {
         type: 'emoji',
@@ -116,20 +114,16 @@ export const ChannelDetails: React.FC = () => {
         <div className="w-full lg:w-1/2 mt-4 lg:mt-0">
           <span className="font-bold text-md">Recent Chats</span>
           <ul className="text-sm">
-            {chats.map((messages, i) => (
+            {chats.map((chat, i) => (
               <li key={i} className="flex border-t py-3">
                 <img src={ModeratorIcon} className="w-5 h-5" />
 
-                {messages.map((message: ChatElement, i) => (
+                {chat.map((me: MessageElement, i) => (
                   <div key={i}>
-                    {message.type === 'text' ? (
-                      <div className="flex items-center">{message.text}</div>
+                    {me.type === 'text' ? (
+                      <div className="flex items-center">{me.text}</div>
                     ) : (
-                      <img
-                        className="w-5 h-5"
-                        src={message.url}
-                        alt={message.label}
-                      />
+                      <img className="w-5 h-5" src={me.url} alt={me.label} />
                     )}
                   </div>
                 ))}
