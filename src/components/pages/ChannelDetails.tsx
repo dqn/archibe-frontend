@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ModeratorIcon from '@/assets/moderator.svg';
+
 type Chat = ChatElement[];
 
 type ChatElement = ChatElementText | ChatElementEmoji;
@@ -86,7 +88,7 @@ export const ChannelDetails: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-wrap mt-8">
-        <div className="w-full lg:w-1/2 mt-4 lg:pr-8">
+        <div className="w-full lg:w-1/2 lg:pr-8">
           <span className="font-bold text-md">Overview</span>
           <table className="w-full table-fixed">
             <thead>
@@ -111,11 +113,13 @@ export const ChannelDetails: React.FC = () => {
             </tbody>
           </table>
         </div>
-        <div className="w-full lg:w-1/2 mt-4">
+        <div className="w-full lg:w-1/2 mt-4 lg:mt-0">
           <span className="font-bold text-md">Recent Chats</span>
           <ul className="text-sm">
             {chats.map((messages, i) => (
               <li key={i} className="flex border-t py-3">
+                <img src={ModeratorIcon} className="w-5 h-5" />
+
                 {messages.map((message: ChatElement, i) => (
                   <div key={i}>
                     {message.type === 'text' ? (
