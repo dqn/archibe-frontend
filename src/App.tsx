@@ -2,25 +2,17 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Home } from './components/pages/Home';
 import { Navigation } from './components/templetes/Navigation';
+import { ChannelList } from './components/pages/ChannelList';
 
 export const App: React.FC = () => {
   return (
-    <>
+    <Router>
       <Navigation />
 
-      <Router>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/about">
-            <div>this is about page</div>
-          </Route>
-          <Route>
-            <div>404 Not Found</div>
-          </Route>
-        </Switch>
-      </Router>
-    </>
+      <Switch>
+        <Route path="/channels" component={ChannelList} />
+        <Route exact path="/" component={Home} />
+      </Switch>
+    </Router>
   );
 };
