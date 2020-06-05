@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import ModeratorIcon from '@/assets/moderator.svg';
+import { getChannel } from '@/api/channel';
+import { useParams } from 'react-router-dom';
 
 type MessageElement = MessageElementText | MessageElementEmoji;
 
@@ -71,6 +73,13 @@ export const ChannelDetails: React.FC = () => {
         'https://yt3.ggpht.com/bjqNUwPSXZRToJ_skzbupyBHTgQbOA2Gw3Wv1cfPNErkcCLdGipQ-zGF36swoW6j8swHGp3hYw=s32-c-k',
     },
   ];
+  const { id } = useParams();
+
+  useEffect(() => {
+    (async () => {
+      await getChannel(id);
+    })();
+  });
 
   return (
     <div className="max-w-screen-lg mx-auto px-4 py-12">
