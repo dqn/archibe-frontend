@@ -1,1 +1,9 @@
 @import './tailwind.css';
+
+a {
+  color: #56b3b4;
+}
+
+a:hover {
+  border-bottom: #56b3b4 solid 1px;
+}
