@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import ModeratorIcon from '@/assets/moderator.svg';
-import { getChannel } from '@/api/channel';
+import { getChannel, GetChannelResponse } from '@/api/channel';
 import { useParams } from 'react-router-dom';
 
 type MessageElement = MessageElementText | MessageElementEmoji;
@@ -18,78 +18,27 @@ type MessageElementEmoji = {
 };
 
 export const ChannelDetails: React.FC = () => {
-  const chats: MessageElement[][] = [
-    [
-      {
-        type: 'emoji',
-        label: ':ヘル絵文字:',
-        url:
-          'https://yt3.ggpht.com/bQwAyOOzbkmbspiiXmKTdtoAkk1moB-IoDm57tr-uxwsL--uwAp7pn-xwUeGxCKplxKLIUC8Tg=w48-h48-c-k-nd',
-      },
-      {
-        type: 'emoji',
-        label: ':エスタ:',
-        url:
-          'https://yt3.ggpht.com/_ry56RH1rcg82sn3dvYxqMDi2g6TUH-YTxCRZ3ri8QbJWV4yzYTY7OATB0-HyoeM5YKzDkfd4cQ=w48-h48-c-k-nd',
-      },
-      {
-        type: 'emoji',
-        label: ':スタート:',
-        url:
-          'https://yt3.ggpht.com/4_cdD5Lw9A-GiaQBz7Nqf740snE4gNRGlsMs_HczDQJh-WsOhNmAQu27r447Of0VSIaWH21qDA=w48-h48-c-k-nd',
-      },
-    ],
-    [
-      {
-        type: 'text',
-        text: 'ついえら',
-      },
-    ],
-    [
-      {
-        type: 'emoji',
-        label: ':ハロ絵文字:',
-        url:
-          'https://yt3.ggpht.com/uduV0nAMMUbllf2scSjK0U2gg6BdbPvJGOnn_UUoT2fzL2SXdUT6x0tXluIQSbd3ERcqVOSTpiU=w48-h48-c-k-nd',
-      },
-      {
-        type: 'text',
-        text: 'エスタ',
-      },
-    ],
-  ];
-
-  const channelName = 'DQN';
-  const profileImageURL =
-    'https://yt3.ggpht.com/-eeYG7UBY_r4/AAAAAAAAAAI/AAAAAAAAAAA/-NxFj-72uRE/s256-c-k-no-mo-rj-c0xffffff/photo.jpg';
-
-  const badges = [
-    {
-      url:
-        'https://yt3.ggpht.com/Wa-BFnHSYbrUshwtB1G7ka08OiLwmJ4-TR6NlR7TEwUtsZI8Fz_751JkprNPO9hMDSZkBannOw=s32-c-k',
-    },
-    {
-      url:
-        'https://yt3.ggpht.com/bjqNUwPSXZRToJ_skzbupyBHTgQbOA2Gw3Wv1cfPNErkcCLdGipQ-zGF36swoW6j8swHGp3hYw=s32-c-k',
-    },
-  ];
   const { id } = useParams();
+
+  const [channel, setChannel] = useState<GetChannelResponse>();
 
   useEffect(() => {
     (async () => {
-      await getChannel(id);
+      const channel = await getChannel(id);
+      setChannel(channel);
+      console.log(channel);
     })();
-  });
+  }, []);
 
   return (
     <div className="max-w-screen-lg mx-auto px-4 py-12">
       <div className="flex">
-        <img className="rounded-full w-32" src={profileImageURL} />
+        <img className="rounded-full w-32" src={channel?.imageUrl} />
         <div className="font-bold ml-8 mt-3 text-3xl">
-          <div>{channelName}</div>
+          <div>{channel?.name}</div>
           <div className="flex">
-            {badges.map((badge, i) => (
-              <img key={i} className="w-6" src={badge.url} />
+            {channel?.badges?.map((badge, i) => (
+              <img key={i} className="w-6" src={badge.imageUrl} alt={badge.label} />
             ))}
           </div>
         </div>
@@ -123,11 +72,11 @@ export const ChannelDetails: React.FC = () => {
         <div className="w-full lg:w-1/2 mt-4 lg:mt-0">
           <span className="font-bold text-md">Recent Chats</span>
           <ul className="text-sm">
-            {chats.map((chat, i) => (
+            {[].map((_, i) => (
               <li key={i} className="flex border-t py-3">
                 <img src={ModeratorIcon} className="w-5 h-5" />
 
-                {chat.map((me: MessageElement, i) => (
+                {[].map((me: MessageElement, i) => (
                   <div key={i}>
                     {me.type === 'text' ? (
                       <div className="flex items-center">{me.text}</div>
