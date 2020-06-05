@@ -1,6 +1,6 @@
 import { client } from './client';
 
-export async function getChannel(channelID: string) {
-  const res = await client.get(`/channels/${channelID}`);
+export async function getChannel(channelId: string) {
+  const res = await client.get(`/channels/${channelId}`);
   console.log(res);
 }
