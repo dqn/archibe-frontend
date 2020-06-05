@@ -7,8 +7,8 @@ export type GetChannelResponse = {
   imageUrl: string;
   sentChatCount: number;
   receivedChatCount: number;
-  created_at: string;
-  updated_at: string;
+  createdAt: string;
+  updatedAt: string;
   badges: Badge[];
   videos: Video[];
 };
