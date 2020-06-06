@@ -1,37 +1,23 @@
 import React, { useEffect, useState } from 'react';
 
 import ModeratorIcon from '@/assets/moderator.svg';
-import { getChannel, GetChannelResponse } from '@/api/channel';
+import { getChannel, GetChannelResponse } from '@/api/channels';
 import { useParams } from 'react-router-dom';
 import { improveImageQuality } from '@/lib/youtube';
-
-type MessageElement = MessageElementText | MessageElementEmoji;
-
-type MessageElementText = {
-  type: 'text';
-  text: string;
-};
-
-type MessageElementEmoji = {
-  type: 'emoji';
-  label: string;
-  url: string;
-};
+import { getChats, GetChatsResponse } from '@/api/chats';
 
 export const ChannelDetails: React.FC = () => {
   const { id } = useParams();
 
   const [channel, setChannel] = useState<GetChannelResponse>();
+  const [chats, setChats] = useState<GetChatsResponse>();
 
   useEffect(() => {
-    (async () => {
-      const channel = await getChannel(id);
-      setChannel(channel);
-      console.log(channel);
-    })();
+    getChannel(id).then(setChannel);
+    getChats({ channelId: id }).then(setChats);
   }, []);
 
-  if (!channel) {
+  if (!channel || !chats) {
     return <></>;
   }
 
@@ -70,7 +56,7 @@ export const ChannelDetails: React.FC = () => {
                 <td className="border px-2 py-1">{channel.sentChatCount}</td>
               </tr>
               <tr>
-                <td className="border px-2 py-1">Eecieved chats</td>
+                <td className="border px-2 py-1">Recieved chats</td>
                 <td className="border px-2 py-1">{channel.receivedChatCount}</td>
               </tr>
               <tr>
@@ -83,16 +69,19 @@ export const ChannelDetails: React.FC = () => {
         <div className="w-full mt-6">
           <span className="font-bold text-md ml-1">Recent chats</span>
           <ul className="text-sm">
-            {[].map((_, i) => (
+            {chats.map((chat, i) => (
               <li key={i} className="flex border-t py-3">
-                <img src={ModeratorIcon} className="w-5 h-5" />
+                <img src={chat.channel.imageUrl} className="w-6 h-6" />
+                {chat.badges?.find((badge) => badge.badgeType === 'moderator') && (
+                  <img src={ModeratorIcon} className="w-5 h-5" />
+                )}
 
-                {[].map((me: MessageElement, i) => (
-                  <div key={i}>
+                {chat.messageElements.map((me, i) => (
+                  <div key={i} className="ml-3">
                     {me.type === 'text' ? (
                       <div className="flex items-center">{me.text}</div>
                     ) : (
-                      <img className="w-5 h-5" src={me.url} alt={me.label} />
+                      <img className="w-5 h-5" src={me.imageUrl} alt={me.label} />
                     )}
                   </div>
                 ))}
