@@ -20,7 +20,7 @@ export const PrettyTable: React.FC<Props> = ({ items }) => {
       </thead>
       <tbody>
         {items.map((item, i) => (
-          <tr key={i}>
+          <tr key={i} className="even:bg-gray-100">
             <td className="border px-2 py-1">{item.title}</td>
             <td className="border px-2 py-1">{item.content}</td>
           </tr>
