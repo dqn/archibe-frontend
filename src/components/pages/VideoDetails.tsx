@@ -5,6 +5,7 @@ import { getVideo, GetVideoResponse } from '@/api/videos';
 import { useParams } from 'react-router-dom';
 // import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
+import { ExpandableTextView } from '../organisms/ExpandableTextView';
 import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
 import dayjs from 'dayjs';
 
@@ -61,9 +62,7 @@ export const VideoDetails: React.FC = () => {
       </div>
       <div className="pl-1 pt-1">
         <h3 className="font-bold text-xl">{video.title}</h3>
-        <div className="text-sm mt-4">
-          {video.description.split('\n').map((row) => (row ? <div>{row}</div> : <br />))}
-        </div>
+        <ExpandableTextView text={video.description} />
       </div>
       <div className="w-full py-4">
         <span className="font-bold text-md ml-1">Overview</span>
