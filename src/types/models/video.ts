@@ -1,3 +1,5 @@
+import { Channel } from './channel';
+
 export type Video = {
   id: number;
   videoId: string;
@@ -16,4 +18,5 @@ export type Video = {
   liveEndedAt: string;
   createdAt: string;
   updatedAt: string;
+  channel?: Channel;
 };
