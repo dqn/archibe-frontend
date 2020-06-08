@@ -1,13 +1,13 @@
 export type Video = {
   id: number;
-  videoID: string;
-  channelID: string;
+  videoId: string;
+  channelId: string;
   title: string;
   description: string;
   lengthSeconds: number;
   viewCount: number;
   averageRating: number;
-  thumbnailURL: string;
+  thumbnailUrl: string;
   category: string;
   isPrivate: boolean;
   publishDate: string;
