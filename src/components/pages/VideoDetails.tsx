@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 // import ModeratorIcon from '@/assets/moderator.svg';
 import { getVideo, GetVideoResponse } from '@/api/videos';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 // import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { ExpandableTextView } from '../organisms/ExpandableTextView';
@@ -36,11 +36,7 @@ export const VideoDetails: React.FC = () => {
     },
     {
       title: 'Channel',
-      content: (
-        <ExternalLink href={`https://www.youtube.com/channel/${video.channel.channelId}`}>
-          {video.channel.name}
-        </ExternalLink>
-      ),
+      content: <Link to={`/channels/${video.channel.channelId}`}>{video.channel.name}</Link>,
     },
     {
       title: 'Live started at',

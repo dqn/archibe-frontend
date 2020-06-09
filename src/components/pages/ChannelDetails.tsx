@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
+import { ExternalLink } from '../molecules/ExternalLink';
 
 export const ChannelDetails: React.FC = () => {
   const { id } = useParams();
@@ -25,7 +26,11 @@ export const ChannelDetails: React.FC = () => {
   const overviewItems: PrettyTableItem[] = [
     {
       title: 'Channel',
-      content: <a href={`https://www.youtube.com/channel/${channel.channelId}`}>YouTube</a>,
+      content: (
+        <ExternalLink href={`https://www.youtube.com/channel/${channel.channelId}`}>
+          YouTube
+        </ExternalLink>
+      ),
     },
     {
       title: 'Sent chats',
@@ -48,7 +53,7 @@ export const ChannelDetails: React.FC = () => {
         <div className="font-bold ml-8 mt-3 text-3xl">
           <div>{channel.name}</div>
           <div className="flex">
-            {channel.badges.map((badge, i) => (
+            {channel.badges?.map((badge, i) => (
               <img key={i} className="w-6" src={badge.imageUrl} alt={badge.label} />
             ))}
           </div>
@@ -65,7 +70,7 @@ export const ChannelDetails: React.FC = () => {
             {chats.map((chat, i) => (
               <li key={i} className="flex border-t py-3">
                 <img src={chat.channel.imageUrl} className="w-6 h-6" />
-                {chat.badges.find((badge) => badge.badgeType === 'moderator') && (
+                {chat.badges?.find((badge) => badge.badgeType === 'moderator') && (
                   <img src={ModeratorIcon} className="w-5 h-5" />
                 )}
 
