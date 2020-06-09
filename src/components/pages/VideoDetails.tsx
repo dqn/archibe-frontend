@@ -30,16 +30,12 @@ export const VideoDetails: React.FC = () => {
       content: <a href={`https://www.youtube.com/watch?v=${video.videoId}`}>{video.videoId}</a>,
     },
     {
-      title: 'Channel ID',
-      content: video.channelId,
-    },
-    {
-      title: 'Length',
-      content: dayjs().startOf('day').add(video.lengthSeconds, 's').format('hh:mm:ss'),
-    },
-    {
-      title: 'Private',
-      content: video.isPrivate ? 'private' : 'public',
+      title: 'Channel',
+      content: (
+        <a href={`https://www.youtube.com/channel/${video.channel.channelId}`}>
+          {video.channel.name}
+        </a>
+      ),
     },
     {
       title: 'Live started at',
@@ -50,8 +46,28 @@ export const VideoDetails: React.FC = () => {
       content: dayjs(video.liveEndedAt).format('YYYY/MM/DD hh:mm:ss'),
     },
     {
+      title: 'Length',
+      content: dayjs().startOf('day').add(video.lengthSeconds, 's').format('hh:mm:ss'),
+    },
+    {
+      title: 'Super Chat amount',
+      content: (
+        <>
+          {video.totalPurchaseAmounts
+            .sort((a, b) => b.totalPurchaseAmount - a.totalPurchaseAmount)
+            .map(({ currencyUnit, totalPurchaseAmount }, i) => (
+              <div key={i}>{currencyUnit + totalPurchaseAmount.toString()}</div>
+            ))}
+        </>
+      ),
+    },
+    {
+      title: 'Private',
+      content: video.isPrivate ? 'private' : 'public',
+    },
+    {
       title: 'Updated at',
-      content: video.updatedAt,
+      content: dayjs(video.updatedAt).format('YYYY/MM/DD hh:mm:ss'),
     },
   ];
 
@@ -62,7 +78,9 @@ export const VideoDetails: React.FC = () => {
       </div>
       <div className="pl-1 pt-1">
         <h3 className="font-bold text-xl">{video.title}</h3>
-        <ExpandableTextView text={video.description} />
+        <div className="pt-2">
+          <ExpandableTextView text={video.description} />
+        </div>
       </div>
       <div className="w-full py-4">
         <span className="font-bold text-md ml-1">Overview</span>
