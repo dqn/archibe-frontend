@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Linkify from 'react-linkify';
+import { ExternalLink } from '../molecules/ExternalLink';
 
 export type Props = {
   text: string;
@@ -14,9 +15,9 @@ export const ExpandableTextView: React.FC<Props> = ({ text, expanded = false }) 
   const [isExpanded, setIsExpanded] = useState(expanded);
 
   const componentDecorator = (href: string, text: string, key: number) => (
-    <a href={href} key={key} target="_blank" rel="noopener noreferrer">
-      {text}
-    </a>
+    <span key={key}>
+      <ExternalLink href={href}>{text}</ExternalLink>
+    </span>
   );
 
   return (

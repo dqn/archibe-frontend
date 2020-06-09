@@ -8,6 +8,7 @@ import { getChats, GetChatsResponse } from '@/api/chats';
 import { ExpandableTextView } from '../organisms/ExpandableTextView';
 import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
 import dayjs from 'dayjs';
+import { ExternalLink } from '../molecules/ExternalLink';
 
 export const VideoDetails: React.FC = () => {
   const { id } = useParams();
@@ -27,14 +28,18 @@ export const VideoDetails: React.FC = () => {
   const overviewItems: PrettyTableItem[] = [
     {
       title: 'Video ID',
-      content: <a href={`https://www.youtube.com/watch?v=${video.videoId}`}>{video.videoId}</a>,
+      content: (
+        <ExternalLink href={`https://www.youtube.com/watch?v=${video.videoId}`}>
+          {video.videoId}
+        </ExternalLink>
+      ),
     },
     {
       title: 'Channel',
       content: (
-        <a href={`https://www.youtube.com/channel/${video.channel.channelId}`}>
+        <ExternalLink href={`https://www.youtube.com/channel/${video.channel.channelId}`}>
           {video.channel.name}
-        </a>
+        </ExternalLink>
       ),
     },
     {
