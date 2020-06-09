@@ -1,34 +1,32 @@
 import React, { useState } from 'react';
+import Linkify from 'react-linkify';
 
 export type Props = {
   text: string;
   expanded?: boolean;
-  lineCount?: number;
 };
 
-export const ExpandableTextView: React.FC<Props> = ({ text, expanded = false, lineCount = 2 }) => {
+export const ExpandableTextView: React.FC<Props> = ({ text, expanded = false }) => {
   const [isExpanded, setIsExpanded] = useState(expanded);
-  const lines = text.split('\n');
+
+  const componentDecorator = (href: string, text: string, key: number) => (
+    <a href={href} key={key} target="_blank" rel="noopener noreferrer">
+      {text}
+    </a>
+  );
 
   return (
     <>
-      {lines.slice(0, lineCount).map((line, i) => (
-        <div key={i}>{line ? <div>{line}</div> : <br />}</div>
-      ))}
-      {lines.length >= lineCount &&
-        (isExpanded ? (
-          <>
-            {lines.slice(lineCount).map((line, i) => (
-              <div key={i}>{line ? <div>{line}</div> : <br />}</div>
-            ))}
-            <div className="mt-4" />
-            <a onClick={() => setIsExpanded(false)}>show less</a>
-          </>
+      <div className={`whitespace-pre-line ${isExpanded ? '' : 'truncate'}`}>
+        <Linkify componentDecorator={componentDecorator}>{text}</Linkify>
+      </div>
+      <div className="mt-3">
+        {isExpanded ? (
+          <a onClick={() => setIsExpanded(false)}>show less</a>
         ) : (
-          <a className="mt-3" onClick={() => setIsExpanded(true)}>
-            show more
-          </a>
-        ))}
+          <a onClick={() => setIsExpanded(true)}>show more</a>
+        )}
+      </div>
     </>
   );
 };
