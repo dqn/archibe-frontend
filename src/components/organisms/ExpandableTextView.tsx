@@ -12,14 +12,14 @@ export const ExpandableTextView: React.FC<Props> = ({ text, expanded = false, li
 
   return (
     <>
-      {lines.slice(0, lineCount).map((row, i) => (
-        <div key={i}>{row ? <div>{row}</div> : <br />}</div>
+      {lines.slice(0, lineCount).map((line, i) => (
+        <div key={i}>{line ? <div>{line}</div> : <br />}</div>
       ))}
       {lines.length >= lineCount &&
         (isExpanded ? (
           <>
-            {lines.slice(lineCount).map((row, i) => (
-              <div key={i}>{row ? <div>{row}</div> : <br />}</div>
+            {lines.slice(lineCount).map((line, i) => (
+              <div key={i}>{line ? <div>{line}</div> : <br />}</div>
             ))}
             <div className="mt-4" />
             <a onClick={() => setIsExpanded(false)}>show less</a>
