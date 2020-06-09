@@ -1,5 +1,3 @@
-import { Channel } from './channel';
-
 export type Video = {
   id: number;
   videoId: string;
@@ -19,7 +17,6 @@ export type Video = {
   createdAt: string;
   updatedAt: string;
   totalPurchaseAmounts: TotalPurchaseAmount[];
-  channel: Channel;
 };
 
 export type TotalPurchaseAmount = {

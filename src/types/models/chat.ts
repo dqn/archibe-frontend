@@ -1,5 +1,4 @@
 import { Channel } from './channel';
-import { Badge } from './badge';
 
 type BaseChat = {
   id: number;
@@ -12,7 +11,6 @@ type BaseChat = {
   createdAt: string;
   updatedAt: string;
   channel: Channel;
-  badges: Badge[];
 };
 
 export type NormalChat = BaseChat & {

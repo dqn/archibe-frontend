@@ -4,8 +4,8 @@ import { Badge } from '@/types/models/badge';
 import { Video } from '@/types/models/video';
 
 export type GetChannelResponse = Channel & {
-  badges: Badge[];
-  videos: Video[];
+  badges?: Badge[];
+  videos?: Video[];
 };
 
 export async function getChannel(channelId: string): Promise<GetChannelResponse> {

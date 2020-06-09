@@ -1,6 +1,3 @@
-import { Badge } from './badge';
-import { Video } from './video';
-
 export type Channel = {
   id: number;
   channelId: string;
@@ -10,6 +7,4 @@ export type Channel = {
   updatedAt: string;
   sentChatCount: number;
   receivedChatCount: number;
-  badges: Badge[];
-  videos: Video[];
 };
