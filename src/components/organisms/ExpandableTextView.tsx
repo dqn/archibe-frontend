@@ -6,6 +6,10 @@ export type Props = {
   expanded?: boolean;
 };
 
+function preprocess(text: string): string {
+  return text.replace(/([^\s])http/g, '$1 http');
+}
+
 export const ExpandableTextView: React.FC<Props> = ({ text, expanded = false }) => {
   const [isExpanded, setIsExpanded] = useState(expanded);
 
@@ -17,15 +21,11 @@ export const ExpandableTextView: React.FC<Props> = ({ text, expanded = false }) 
 
   return (
     <>
-      <div className={`whitespace-pre-line ${isExpanded ? '' : 'truncate'}`}>
-        <Linkify componentDecorator={componentDecorator}>{text}</Linkify>
+      <div className={isExpanded ? 'whitespace-pre-line' : 'truncate'}>
+        <Linkify componentDecorator={componentDecorator}>{preprocess(text)}</Linkify>
       </div>
       <div className="mt-3">
-        {isExpanded ? (
-          <a onClick={() => setIsExpanded(false)}>show less</a>
-        ) : (
-          <a onClick={() => setIsExpanded(true)}>show more</a>
-        )}
+        <a onClick={() => setIsExpanded(!isExpanded)}>{isExpanded ? 'show less' : 'show more'}</a>
       </div>
     </>
   );
