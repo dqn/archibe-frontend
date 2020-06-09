@@ -18,5 +18,11 @@ export type Video = {
   liveEndedAt: string;
   createdAt: string;
   updatedAt: string;
-  channel?: Channel;
+  totalPurchaseAmounts: TotalPurchaseAmount[];
+  channel: Channel;
+};
+
+export type TotalPurchaseAmount = {
+  currencyUnit: string;
+  totalPurchaseAmount: number;
 };

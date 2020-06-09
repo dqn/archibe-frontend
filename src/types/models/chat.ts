@@ -11,8 +11,8 @@ type BaseChat = {
   messageElements: MessageElement[];
   createdAt: string;
   updatedAt: string;
-  channel?: Channel;
-  badges?: Badge[];
+  channel: Channel;
+  badges: Badge[];
 };
 
 export type NormalChat = BaseChat & {

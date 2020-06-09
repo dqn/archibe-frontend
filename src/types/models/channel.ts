@@ -10,6 +10,6 @@ export type Channel = {
   updatedAt: string;
   sentChatCount: number;
   receivedChatCount: number;
-  badges?: Badge[];
-  videos?: Video[];
+  badges: Badge[];
+  videos: Video[];
 };
