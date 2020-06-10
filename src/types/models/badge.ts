@@ -1,7 +1,7 @@
 export type Badge = {
   id: number;
   chatId: string;
-  badgeType: string;
+  badgeType: 'moderator' | 'member';
   imageUrl: string;
   label: string;
   createdAt: string;
