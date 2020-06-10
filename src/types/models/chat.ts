@@ -6,7 +6,7 @@ type BaseChat = {
   authorChannelId: string;
   videoId: string;
   timestamp: string;
-  timestampUsec: string;
+  timestampUsec: number;
   messageElements: MessageElement[];
   createdAt: string;
   updatedAt: string;
