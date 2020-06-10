@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-// import ModeratorIcon from '@/assets/moderator.svg';
 import { getVideo, GetVideoResponse } from '@/api/videos';
 import { useParams, Link } from 'react-router-dom';
-// import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { ExpandableTextView } from '../organisms/ExpandableTextView';
 import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
 import dayjs from 'dayjs';
 import { ExternalLink } from '../molecules/ExternalLink';
+import { ChatList } from '../organisms/ChatList';
 
 export const VideoDetails: React.FC = () => {
   const { id } = useParams();
@@ -18,7 +17,7 @@ export const VideoDetails: React.FC = () => {
 
   useEffect(() => {
     getVideo(id).then(setVideo);
-    getChats({ channelId: id }).then(setChats);
+    getChats({ videoId: id }).then(setChats);
   }, []);
 
   if (!video || !chats) {
@@ -83,9 +82,13 @@ export const VideoDetails: React.FC = () => {
           <ExpandableTextView text={video.description} />
         </div>
       </div>
-      <div className="w-full py-4">
+      <div className="w-full pt-4">
         <span className="font-bold text-md ml-1">Overview</span>
         <PrettyTable items={overviewItems} />
+      </div>
+      <div className="pt-4">
+        <span className="font-bold text-md ml-1">Chats</span>
+        <ChatList chats={chats} />
       </div>
     </div>
   );
