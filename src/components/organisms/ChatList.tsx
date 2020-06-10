@@ -3,6 +3,7 @@ import ModeratorIcon from '@/assets/moderator.svg';
 import { GetChatsResponse } from '@/api/chats';
 import { Badge } from '@/types/models/badge';
 import { Link } from 'react-router-dom';
+import { ChatMessage } from '../molecules/ChatMessage';
 
 export type Props = {
   chats: GetChatsResponse;
@@ -29,20 +30,12 @@ export const ChatList: React.FC<Props> = ({ chats }) => {
               {isModerator(chat.badges) && <img src={ModeratorIcon} className="w-5 h-5 inline" />}
               {chat.badges
                 ?.filter((badge) => badge.badgeType === 'member')
-                ?.map((badge) => (
-                  <img src={badge.imageUrl} className="w-5 h-5 ml-1 inline" />
+                ?.map((badge, j) => (
+                  <img key={j} src={badge.imageUrl} className="w-5 h-5 ml-1 inline" />
                 ))}
             </span>
             <span className="ml-2">
-              {chat.messageElements.map((me, i) => (
-                <span key={i}>
-                  {me.type === 'text' ? (
-                    <span className="text-gray-800">{me.text}</span>
-                  ) : (
-                    <img className="w-6 h-6 mx-1 inline" src={me.imageUrl} alt={me.label} />
-                  )}
-                </span>
-              ))}
+              <ChatMessage messageElements={chat.messageElements} />
             </span>
           </div>
         </li>
