@@ -66,7 +66,7 @@ export const ChannelDetails: React.FC = () => {
         </div>
         <div className="w-full mt-6">
           <span className="font-bold text-md ml-1">Recent chats</span>
-          <ChatList chats={chats} />
+          <ChatList chats={chats} showDatetime={true} showVideoId={true} />
         </div>
       </div>
     </div>

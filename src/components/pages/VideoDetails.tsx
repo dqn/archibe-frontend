@@ -88,7 +88,7 @@ export const VideoDetails: React.FC = () => {
       </div>
       <div className="pt-4">
         <span className="font-bold text-md ml-1">Chats</span>
-        <ChatList chats={chats} />
+        <ChatList chats={chats} showChannelName={true} showOffsetTime={true} />
       </div>
     </div>
   );
