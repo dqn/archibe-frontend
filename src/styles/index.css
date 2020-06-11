@@ -29,6 +29,10 @@ a:hover {
   height: 100%;
 }
 
-.moderator {
+.moderator-color {
   color: #5e84f1;
+}
+
+.member-color {
+  color: #2ba640;
 }

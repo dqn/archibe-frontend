@@ -72,12 +72,7 @@ export const ChannelDetails: React.FC = () => {
         </div>
         <div className="w-full mt-6">
           <span className="font-bold text-md ml-1">Recent chats</span>
-          <ChatList
-            chats={chats}
-            onScroll={onChatListScroll}
-            showDatetime={true}
-            showVideoId={true}
-          />
+          <ChatList chats={chats} onScroll={onChatListScroll} showDatetime={true} />
         </div>
       </div>
     </div>
