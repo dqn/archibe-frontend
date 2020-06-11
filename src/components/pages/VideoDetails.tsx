@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
+import dayjs from 'dayjs';
+import { useParams, Link } from 'react-router-dom';
 
 import { getVideo, GetVideoResponse } from '@/api/videos';
-import { useParams, Link } from 'react-router-dom';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { ExpandableTextView } from '../organisms/ExpandableTextView';
 import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
-import dayjs from 'dayjs';
 import { ExternalLink } from '../molecules/ExternalLink';
 import { ChatList } from '../organisms/ChatList';
+import { TotalPurchaseAmounts } from '../molecules/TotalPurchaseAmounts';
 
 export const VideoDetails: React.FC = () => {
   const { id } = useParams();
@@ -54,15 +55,7 @@ export const VideoDetails: React.FC = () => {
     },
     {
       title: 'Super Chat amount',
-      content: (
-        <>
-          {video.totalPurchaseAmounts
-            .sort((a, b) => b.totalPurchaseAmount - a.totalPurchaseAmount)
-            .map(({ currencyUnit, totalPurchaseAmount }, i) => (
-              <div key={i}>{currencyUnit + totalPurchaseAmount.toString()}</div>
-            ))}
-        </>
-      ),
+      content: <TotalPurchaseAmounts totalPurchaseAmounts={video.totalPurchaseAmounts} />,
     },
     {
       title: 'Private',
@@ -84,7 +77,7 @@ export const VideoDetails: React.FC = () => {
   return (
     <div className="max-w-screen-lg mx-auto py-8">
       <div className="youtube">
-        <iframe src={`https://www.youtube.com/embed/${video.videoId}`}></iframe>
+        <iframe src={`https://www.youtube.com/embed/${video.videoId}`} />
       </div>
       <div className="pl-1 pt-1">
         <h3 className="font-bold text-xl">{video.title}</h3>

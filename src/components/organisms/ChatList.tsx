@@ -47,7 +47,7 @@ export const ChatList: React.FC<Props> = ({
               showChannelName={showChannelName}
               showOffsetTime={showOffsetTime}
               showDatetime={showDatetime}
-            ></ChatItem>
+            />
           </li>
         ))}
       </InfiniteScroll>
