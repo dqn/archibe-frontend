@@ -44,23 +44,20 @@ export const ChatItem: React.FC<Props> = ({
         {showOffsetTime && <span className="text-gray-600">{chat.timestamp}</span>}
         {showDatetime && (
           <span className="ml-2">
-            <Link to={`/videos/${chat.videoId}`}>
-              <span className="text-gray-600">
-                {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD hh:mm')}
-              </span>
+            <Link to={`/videos/${chat.videoId}`} className="text-gray-600">
+              {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD hh:mm')}
             </Link>
           </span>
         )}
         {showChannelName && (
           <span className="ml-2">
-            <Link to={`/channels/${chat.channel.channelId}`}>
-              <span
-                className={
-                  isModerator ? 'moderator-color' : isMember ? 'member-color' : 'text-gray-600'
-                }
-              >
-                {chat.channel.name}
-              </span>
+            <Link
+              to={`/channels/${chat.channel.channelId}`}
+              className={
+                isModerator ? 'moderator-color' : isMember ? 'member-color' : 'text-gray-600'
+              }
+            >
+              {chat.channel.name}
             </Link>
           </span>
         )}

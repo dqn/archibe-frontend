@@ -5,8 +5,8 @@ export const Navigation: React.FC = () => {
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-3">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
-        <Link to="/">
-          <span className="font-semibold text-xl tracking-tight">Tubekids</span>
+        <Link to="/" className="font-semibold text-xl tracking-tight">
+          Tubekids
         </Link>
       </div>
       <div className="block lg:hidden">
@@ -23,10 +23,11 @@ export const Navigation: React.FC = () => {
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm lg:flex-grow">
-          <Link to="/channels">
-            <span className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
-              Channels
-            </span>
+          <Link
+            to="/channels"
+            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+          >
+            Channels
           </Link>
         </div>
         <div>

@@ -5,12 +5,12 @@
   word-wrap: break-word;
 }
 
-a {
-  color: #56b3b4;
+a:hover {
+  border-bottom: 1px solid currentColor;
 }
 
-a:hover {
-  border-bottom: #56b3b4 solid 1px;
+.link {
+  color: #56b3b4;
 }
 
 .youtube {

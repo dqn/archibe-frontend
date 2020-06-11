@@ -12,8 +12,8 @@ export const ChannelList: React.FC = () => {
         <Route exact path={match.path}>
           <ul>
             <li>
-              <Link to={`${match.url}/42`}>
-                <span className="text-blue-600">Example Channel</span>
+              <Link to={`${match.url}/42`} className="text-blue-600">
+                Example Channel
               </Link>
             </li>
           </ul>

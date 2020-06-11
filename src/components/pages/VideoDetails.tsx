@@ -34,7 +34,11 @@ export const VideoDetails: React.FC = () => {
     },
     {
       title: 'Channel',
-      content: <Link to={`/channels/${video.channel.channelId}`}>{video.channel.name}</Link>,
+      content: (
+        <Link to={`/channels/${video.channel.channelId}`} className="link">
+          {video.channel.name}
+        </Link>
+      ),
     },
     {
       title: 'Live started at',
