@@ -67,7 +67,7 @@ export const ChatItem: React.FC<Props> = ({
           ?.map((badge, j) => (
             <img key={j} src={badge.imageUrl} className="w-5 h-5 ml-1 inline" />
           ))}
-        <span className="ml-2">
+        <span className="ml-2 text-gray-800">
           <ChatMessage messageElements={chat.messageElements} />
         </span>
       </div>

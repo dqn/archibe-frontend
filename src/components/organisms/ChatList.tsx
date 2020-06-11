@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { GetChatsResponse } from '@/api/chats';
 import InfiniteScroll from 'react-infinite-scroller';
 import { ChatItem } from './ChatItem';
+import { SuperChatItem } from './SuperChatItem';
 
 export type Props = {
   chats: GetChatsResponse;
@@ -42,12 +43,20 @@ export const ChatList: React.FC<Props> = ({
       >
         {chats.map((chat, i) => (
           <li key={i} className="border-t py-2 mx-2 my-auto flex">
-            <ChatItem
-              chat={chat}
-              showChannelName={showChannelName}
-              showOffsetTime={showOffsetTime}
-              showDatetime={showDatetime}
-            />
+            {chat.type === 'chat' ? (
+              <ChatItem
+                chat={chat}
+                showChannelName={showChannelName}
+                showOffsetTime={showOffsetTime}
+                showDatetime={showDatetime}
+              />
+            ) : (
+              <SuperChatItem
+                chat={chat}
+                showOffsetTime={showOffsetTime}
+                showDatetime={showDatetime}
+              />
+            )}
           </li>
         ))}
       </InfiniteScroll>
