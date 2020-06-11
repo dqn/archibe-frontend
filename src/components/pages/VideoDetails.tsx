@@ -13,14 +13,13 @@ export const VideoDetails: React.FC = () => {
   const { id } = useParams();
 
   const [video, setVideo] = useState<GetVideoResponse>();
-  const [chats, setChats] = useState<GetChatsResponse>();
+  const [chats, setChats] = useState<GetChatsResponse>([]);
 
   useEffect(() => {
     getVideo(id).then(setVideo);
-    getChats({ videoId: id }).then(setChats);
   }, []);
 
-  if (!video || !chats) {
+  if (!video) {
     return <></>;
   }
 
@@ -71,6 +70,13 @@ export const VideoDetails: React.FC = () => {
     },
   ];
 
+  const onChatListScroll = (offset: number, limit: number): Promise<number> => {
+    return getChats({ videoId: id, offset, limit }).then((newChats) => {
+      setChats([...chats, ...newChats]);
+      return newChats.length;
+    });
+  };
+
   return (
     <div className="max-w-screen-lg mx-auto py-8">
       <div className="youtube">
@@ -88,7 +94,12 @@ export const VideoDetails: React.FC = () => {
       </div>
       <div className="pt-4">
         <span className="font-bold text-md ml-1">Chats</span>
-        <ChatList chats={chats} showChannelName={true} showOffsetTime={true} />
+        <ChatList
+          chats={chats}
+          onScroll={onChatListScroll}
+          showChannelName={true}
+          showOffsetTime={true}
+        />
       </div>
     </div>
   );

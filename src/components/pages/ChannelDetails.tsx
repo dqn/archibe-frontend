@@ -12,14 +12,13 @@ export const ChannelDetails: React.FC = () => {
   const { id } = useParams();
 
   const [channel, setChannel] = useState<GetChannelResponse>();
-  const [chats, setChats] = useState<GetChatsResponse>();
+  const [chats, setChats] = useState<GetChatsResponse>([]);
 
   useEffect(() => {
     getChannel(id).then(setChannel);
-    getChats({ channelId: id }).then(setChats);
   }, []);
 
-  if (!channel || !chats) {
+  if (!channel) {
     return <></>;
   }
 
@@ -46,6 +45,13 @@ export const ChannelDetails: React.FC = () => {
     },
   ];
 
+  const onChatListScroll = (offset: number, limit: number): Promise<number> => {
+    return getChats({ channelId: id, offset, limit, order: 'desc' }).then((newChats) => {
+      setChats([...chats, ...newChats]);
+      return newChats.length;
+    });
+  };
+
   return (
     <div className="max-w-screen-lg mx-auto py-12">
       <div className="flex">
@@ -66,7 +72,12 @@ export const ChannelDetails: React.FC = () => {
         </div>
         <div className="w-full mt-6">
           <span className="font-bold text-md ml-1">Recent chats</span>
-          <ChatList chats={chats} showDatetime={true} showVideoId={true} />
+          <ChatList
+            chats={chats}
+            onScroll={onChatListScroll}
+            showDatetime={true}
+            showVideoId={true}
+          />
         </div>
       </div>
     </div>
