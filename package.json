@@ -16,7 +16,8 @@
     "react-dom": "^16.13.1",
     "react-infinite-scroller": "^1.2.4",
     "react-linkify": "^1.0.0-alpha",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-tippy": "^1.4.0"
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.2.0",

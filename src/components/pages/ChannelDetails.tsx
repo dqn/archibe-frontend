@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-
-import { getChannel, GetChannelResponse } from '@/api/channels';
 import { useParams } from 'react-router-dom';
+import { Tooltip } from 'react-tippy';
+import { getChannel, GetChannelResponse } from '@/api/channels';
 import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
@@ -60,7 +60,9 @@ export const ChannelDetails: React.FC = () => {
           <div>{channel.name}</div>
           <div className="flex">
             {channel.badges?.map((badge, i) => (
-              <img key={i} className="w-6" src={badge.imageUrl} alt={badge.label} />
+              <Tooltip key={i} title={badge.label}>
+                <img src={badge.imageUrl} className="w-6" />
+              </Tooltip>
             ))}
           </div>
         </div>

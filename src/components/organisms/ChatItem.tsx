@@ -1,5 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
+import { Tooltip } from 'react-tippy';
 import ModeratorIcon from '@/assets/moderator.svg';
 import { GetChatsResponse } from '@/api/chats';
 import { Link } from 'react-router-dom';
@@ -64,7 +65,9 @@ export const ChatItem: React.FC<Props> = ({
         {chat.badges
           ?.filter((badge) => badge.badgeType === 'member')
           ?.map((badge, j) => (
-            <img key={j} src={badge.imageUrl} className="w-5 h-5 ml-1 inline" />
+            <Tooltip key={j} title={badge.label}>
+              <img src={badge.imageUrl} className="w-5 h-5 ml-1 inline" />
+            </Tooltip>
           ))}
         <span className="ml-2 text-gray-800">
           <ChatMessage messageElements={chat.messageElements} />
