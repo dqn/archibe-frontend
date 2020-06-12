@@ -21,10 +21,12 @@ export const SuperChatItem: React.FC<Props> = ({
   showOffsetTime = false,
   showDatetime = false,
 }) => {
+  const isSilent = !chat.messageElements.length;
+
   return (
     <div className="w-full max-w-sm">
       <div
-        className="flex px-4 py-2 rounded-t"
+        className={`flex px-4 py-2 ${isSilent ? 'rounded' : 'rounded-t'}`}
         style={{
           backgroundColor: normalizeColor(chat.superChatContext.headerBackgroundColor),
           color: normalizeColor(chat.superChatContext.headerTextColor),
@@ -39,31 +41,28 @@ export const SuperChatItem: React.FC<Props> = ({
             <div className="w-1/3">
               {formatPurchaseAmount(chat.currencyUnit, chat.purchaseAmount)}
             </div>
-            {(showOffsetTime || showDatetime) && (
-              <div className="w-full text-xs text-right">
-                <span>(</span>
-                {showOffsetTime && <span>{chat.timestamp}</span>}
-                {showOffsetTime && showDatetime && <span className="ml-2" />}
-                {showDatetime && (
-                  <Link to={`/videos/${chat.videoId}`}>
-                    {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD hh:mm')}
-                  </Link>
-                )}
-                <span>)</span>
-              </div>
-            )}
+            <div className="w-full text-xs text-right">
+              {showOffsetTime && <span>{chat.timestamp}</span>}
+              {showDatetime && (
+                <Link to={`/videos/${chat.videoId}`}>
+                  {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD hh:mm')}
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>
-      <div
-        className="px-4 py-2 rounded-b"
-        style={{
-          backgroundColor: normalizeColor(chat.superChatContext.bodyBackgroundColor),
-          color: normalizeColor(chat.superChatContext.bodyTextColor),
-        }}
-      >
-        <ChatMessage messageElements={chat.messageElements} />
-      </div>
+      {!isSilent && (
+        <div
+          className="px-4 py-2 rounded-b"
+          style={{
+            backgroundColor: normalizeColor(chat.superChatContext.bodyBackgroundColor),
+            color: normalizeColor(chat.superChatContext.bodyTextColor),
+          }}
+        >
+          <ChatMessage messageElements={chat.messageElements} />
+        </div>
+      )}
     </div>
   );
 };
