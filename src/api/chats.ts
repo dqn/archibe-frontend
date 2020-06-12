@@ -2,6 +2,7 @@ import { client } from './client';
 import { Channel } from '@/types/models/channel';
 import { Chat } from '@/types/models/chat';
 import { Badge } from '@/types/models/badge';
+import { Video } from '@/types/models/video';
 
 export type GetChatsParams = {
   channelId?: string;
@@ -13,6 +14,7 @@ export type GetChatsParams = {
 
 export type GetChatsResponse = (Chat & {
   channel: Channel;
+  video: Video;
   badges?: Badge[];
 })[];
 

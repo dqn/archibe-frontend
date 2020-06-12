@@ -18,6 +18,7 @@ export const ChatItem: React.FC<Props> = ({
   showOffsetTime = false,
   showDatetime = false,
 }) => {
+  const isOwner = chat.authorChannelId === chat.video.channelId;
   let isMember = false;
   let isModerator = false;
 
@@ -50,12 +51,10 @@ export const ChatItem: React.FC<Props> = ({
           </span>
         )}
         {showChannelName && (
-          <span className="ml-2">
+          <span className={`ml-2 ${isOwner ? 'owner-channel-name' : 'text-gray-600'}`}>
             <Link
               to={`/channels/${chat.channel.channelId}`}
-              className={
-                isModerator ? 'moderator-color' : isMember ? 'member-color' : 'text-gray-600'
-              }
+              className={isModerator ? 'moderator-color' : isMember ? 'member-color' : ''}
             >
               {chat.channel.name}
             </Link>

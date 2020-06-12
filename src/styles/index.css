@@ -36,3 +36,14 @@ a:hover {
 .member-color {
   color: #107516;
 }
+
+.owner-color {
+  color: #ffd600;
+}
+
+.owner-channel-name {
+  border: 0 solid #e2e8f0;
+  border-radius: 0.125rem;
+  padding: 0.3rem 0.3rem;
+  background-color: #ffd600;
+}
