@@ -51,7 +51,10 @@ export const VideoDetails: React.FC = () => {
     },
     {
       title: 'Length',
-      content: dayjs().startOf('day').add(video.lengthSeconds, 's').format('hh:mm:ss'),
+      content: dayjs()
+        .startOf('day')
+        .add(video.lengthSeconds, 's')
+        .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'hh:mm:ss'),
     },
     {
       title: 'Super Chat amount',
