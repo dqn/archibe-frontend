@@ -13,7 +13,7 @@ export type Props = {
   showDatetime?: boolean;
 };
 
-export const ChatList: React.FC<Props> = ({
+export const ChatViewer: React.FC<Props> = ({
   chats,
   onScroll,
   chatsPerPage = 30,

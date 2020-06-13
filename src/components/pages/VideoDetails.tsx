@@ -7,7 +7,7 @@ import { getChats, GetChatsResponse } from '@/api/chats';
 import { ExpandableTextView } from '../organisms/ExpandableTextView';
 import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
 import { ExternalLink } from '../molecules/ExternalLink';
-import { ChatList } from '../organisms/ChatList';
+import { ChatViewer } from '../organisms/ChatViewer';
 import { TotalPurchaseAmounts } from '../molecules/TotalPurchaseAmounts';
 
 export const VideoDetails: React.FC = () => {
@@ -70,7 +70,7 @@ export const VideoDetails: React.FC = () => {
     },
   ];
 
-  const onChatListScroll = (offset: number, limit: number): Promise<number> => {
+  const handleChatViewerScroll = (offset: number, limit: number): Promise<number> => {
     return getChats({ videoId: id, offset, limit }).then((newChats) => {
       setChats([...chats, ...newChats]);
       return newChats.length;
@@ -96,9 +96,9 @@ export const VideoDetails: React.FC = () => {
       </div>
       <div className="pt-4">
         <span className="font-bold text-md ml-1">Chats</span>
-        <ChatList
+        <ChatViewer
           chats={chats}
-          onScroll={onChatListScroll}
+          onScroll={handleChatViewerScroll}
           showChannelName={true}
           showOffsetTime={true}
         />

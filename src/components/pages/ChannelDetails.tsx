@@ -7,7 +7,7 @@ import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
 import { ExternalLink } from '../molecules/ExternalLink';
-import { ChatList } from '../organisms/ChatList';
+import { ChatViewer } from '../organisms/ChatViewer';
 
 export const ChannelDetails: React.FC = () => {
   const { id } = useParams();
@@ -46,7 +46,7 @@ export const ChannelDetails: React.FC = () => {
     },
   ];
 
-  const onChatListScroll = (offset: number, limit: number): Promise<number> => {
+  const handleChatViewerScroll = (offset: number, limit: number): Promise<number> => {
     return getChats({ channelId: id, offset, limit, order: 'desc' }).then((newChats) => {
       setChats([...chats, ...newChats]);
       return newChats.length;
@@ -80,7 +80,7 @@ export const ChannelDetails: React.FC = () => {
         </div>
         <div className="w-full mt-6">
           <span className="font-bold text-md ml-1">Recent chats</span>
-          <ChatList chats={chats} onScroll={onChatListScroll} showDatetime={true} />
+          <ChatViewer chats={chats} onScroll={handleChatViewerScroll} showDatetime={true} />
         </div>
       </div>
     </div>
