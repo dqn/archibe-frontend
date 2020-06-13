@@ -1,6 +1,25 @@
 import React, { useState } from 'react';
-import { GetChatsResponse, getChats } from '@/api/chats';
+import { GetChatsResponse, getChats, GetChatsParams } from '@/api/chats';
 import { ChatViewer } from '../organisms/ChatViewer';
+
+function parseQuery(query: string): GetChatsParams {
+  const qArray: string[] = [];
+  const params: GetChatsParams = {};
+
+  query.split(/\s+/).forEach((word) => {
+    if (word.startsWith('channel:')) {
+      params.channelId = word.replace('channel:', '');
+    } else if (word.startsWith('video:')) {
+      params.videoId = word.replace('video:', '');
+    } else {
+      qArray.push(word);
+    }
+  });
+
+  params.q = qArray.join(' ');
+
+  return params;
+}
 
 export const ChatList: React.FC = () => {
   const [query, setQuery] = useState('');
@@ -11,12 +30,12 @@ export const ChatList: React.FC = () => {
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    getChats({ q: query, order: 'desc' }).then(setChats);
+    getChats({ ...parseQuery(query), order: 'desc' }).then(setChats);
     event.preventDefault();
   };
 
   const handleChatViewerScroll = (offset: number, limit: number): Promise<number> => {
-    return getChats({ q: query, order: 'desc', offset, limit }).then((newChats) => {
+    return getChats({ ...parseQuery(query), order: 'desc', offset, limit }).then((newChats) => {
       setChats([...chats, ...newChats]);
       return newChats.length;
     });
