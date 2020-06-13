@@ -5,6 +5,7 @@ import { Badge } from '@/types/models/badge';
 import { Video } from '@/types/models/video';
 
 export type GetChatsParams = {
+  q?: string;
   channelId?: string;
   videoId?: string;
   order?: 'asc' | 'desc';

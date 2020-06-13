@@ -4,6 +4,17 @@ import { Link } from 'react-router-dom';
 export const Navigation: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
 
+  const links = [
+    {
+      text: 'Channels',
+      to: '/channels',
+    },
+    {
+      text: 'Chats',
+      to: '/chats',
+    },
+  ] as const;
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-3">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -32,12 +43,14 @@ export const Navigation: React.FC = () => {
         }`}
       >
         <div className="text-sm lg:flex-grow transition">
-          <Link
-            to="/channels"
-            className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-          >
-            Channels
-          </Link>
+          {links.map(({ text, to }) => (
+            <Link
+              to={to}
+              className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
+            >
+              {text}
+            </Link>
+          ))}
         </div>
         <div>
           <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white mt-4 lg:mt-0">
