@@ -24,7 +24,7 @@ export const VideoDetails: React.FC = () => {
     return <></>;
   }
 
-  const overviewItems: PrettyTableItem[] = [
+  const overviewItems: Readonly<PrettyTableItem>[] = [
     {
       title: 'Video ID',
       content: (

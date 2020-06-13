@@ -23,7 +23,7 @@ export const ChannelDetails: React.FC = () => {
     return <></>;
   }
 
-  const overviewItems: PrettyTableItem[] = [
+  const overviewItems: Readonly<PrettyTableItem>[] = [
     {
       title: 'Channel',
       content: (
