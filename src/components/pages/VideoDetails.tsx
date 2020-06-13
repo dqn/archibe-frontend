@@ -79,8 +79,10 @@ export const VideoDetails: React.FC = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto py-8">
-      <div className="youtube">
-        <iframe src={`https://www.youtube.com/embed/${video.videoId}`} />
+      <div className="sticky top-0 lg:relative lg:top-auto">
+        <div className="youtube">
+          <iframe src={`https://www.youtube.com/embed/${video.videoId}`} />
+        </div>
       </div>
       <div className="pl-1 pt-1">
         <h3 className="font-bold text-xl">{video.title}</h3>
