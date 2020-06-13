@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
+import dayjs from 'dayjs';
 import { getChannel, GetChannelResponse } from '@/api/channels';
 import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
@@ -41,7 +42,7 @@ export const ChannelDetails: React.FC = () => {
     },
     {
       title: 'Updated at',
-      content: channel.updatedAt,
+      content: dayjs(channel.updatedAt).format('YYYY/MM/DD hh:mm:ss'),
     },
   ];
 
@@ -53,15 +54,20 @@ export const ChannelDetails: React.FC = () => {
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto py-12">
-      <div className="flex">
-        <img className="rounded-full w-32" src={improveImageQuality(channel.imageUrl)} />
-        <div className="font-bold ml-8 mt-3 text-3xl">
-          <div>{channel.name}</div>
-          <div className="flex">
+    <div className="max-w-screen-lg mx-auto py-8">
+      <div className="lg:flex">
+        <div className="w-full lg:w-auto">
+          <img
+            className="rounded-full w-32 h-32 mx-auto"
+            src={improveImageQuality(channel.imageUrl)}
+          />
+        </div>
+        <div className="font-bold text-center mt-3 text-3xl mx-3 lg:ml-8">
+          <div className="lg:text-left">{channel.name}</div>
+          <div className="flex justify-center lg:justify-start">
             {channel.badges?.map((badge, i) => (
               <Tooltip key={i} title={badge.label}>
-                <img src={badge.imageUrl} className="w-6" />
+                <img src={badge.imageUrl} className="w-6 h-6" />
               </Tooltip>
             ))}
           </div>
