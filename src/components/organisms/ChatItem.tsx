@@ -47,7 +47,7 @@ export const ChatItem: React.FC<Props> = ({
         {showDatetime && (
           <span className="ml-2">
             <Link to={`/videos/${chat.videoId}`} className="text-gray-600">
-              {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD hh:mm')}
+              {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD HH:mm')}
             </Link>
           </span>
         )}

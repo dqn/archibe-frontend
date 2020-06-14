@@ -45,7 +45,7 @@ export const SuperChatItem: React.FC<Props> = ({
               {showOffsetTime && <span>{chat.timestamp}</span>}
               {showDatetime && (
                 <Link to={`/videos/${chat.videoId}`}>
-                  {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD hh:mm')}
+                  {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD HH:mm')}
                 </Link>
               )}
             </div>

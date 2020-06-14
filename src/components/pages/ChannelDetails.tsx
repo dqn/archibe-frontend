@@ -51,7 +51,7 @@ export const ChannelDetails: React.FC = () => {
     },
     {
       title: 'Updated at',
-      content: dayjs(channel.updatedAt).format('YYYY/MM/DD hh:mm:ss'),
+      content: dayjs(channel.updatedAt).format('YYYY/MM/DD HH:mm:ss'),
     },
   ];
 

@@ -43,18 +43,18 @@ export const VideoDetails: React.FC = () => {
     },
     {
       title: 'Live started at',
-      content: dayjs(video.liveStartedAt).format('YYYY/MM/DD hh:mm:ss'),
+      content: dayjs(video.liveStartedAt).format('YYYY/MM/DD HH:mm:ss'),
     },
     {
       title: 'Live ended at',
-      content: dayjs(video.liveEndedAt).format('YYYY/MM/DD hh:mm:ss'),
+      content: dayjs(video.liveEndedAt).format('YYYY/MM/DD HH:mm:ss'),
     },
     {
       title: 'Length',
       content: dayjs()
         .startOf('day')
         .add(video.lengthSeconds, 's')
-        .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'hh:mm:ss'),
+        .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'HH:mm:ss'),
     },
     {
       title: 'Super Chat amount',
@@ -66,7 +66,7 @@ export const VideoDetails: React.FC = () => {
     },
     {
       title: 'Updated at',
-      content: dayjs(video.updatedAt).format('YYYY/MM/DD hh:mm:ss'),
+      content: dayjs(video.updatedAt).format('YYYY/MM/DD HH:mm:ss'),
     },
   ];
 
