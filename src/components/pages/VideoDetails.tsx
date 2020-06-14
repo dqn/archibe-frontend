@@ -8,7 +8,7 @@ import { ExpandableTextView } from '../organisms/ExpandableTextView';
 import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
 import { ExternalLink } from '../molecules/ExternalLink';
 import { ChatViewer } from '../organisms/ChatViewer';
-import { TotalPurchaseAmounts } from '../molecules/TotalPurchaseAmounts';
+import { SuperChats } from '../molecules/SuperChats';
 
 export const VideoDetails: React.FC = () => {
   const { id } = useParams();
@@ -58,7 +58,7 @@ export const VideoDetails: React.FC = () => {
     },
     {
       title: 'Super Chat amount',
-      content: <TotalPurchaseAmounts totalPurchaseAmounts={video.totalPurchaseAmounts} />,
+      content: <SuperChats superChats={video.receivedSuperChats} />,
     },
     {
       title: 'Private',

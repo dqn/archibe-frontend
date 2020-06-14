@@ -46,3 +46,8 @@ export type SuperChatContext = {
   bodyTextColor: string;
   authorNameTextColor: string;
 };
+
+export type SuperChatAmountPerCurrencyUnit = {
+  currencyUnit: string;
+  purchaseAmount: number;
+};

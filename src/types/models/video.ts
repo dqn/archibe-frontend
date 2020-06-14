@@ -1,3 +1,5 @@
+import { SuperChatAmountPerCurrencyUnit } from './chat';
+
 export type Video = {
   id: number;
   videoId: string;
@@ -16,10 +18,5 @@ export type Video = {
   liveEndedAt: string;
   createdAt: string;
   updatedAt: string;
-  totalPurchaseAmounts: TotalPurchaseAmount[];
-};
-
-export type TotalPurchaseAmount = {
-  currencyUnit: string;
-  totalPurchaseAmount: number;
+  receivedSuperChats: SuperChatAmountPerCurrencyUnit[];
 };
