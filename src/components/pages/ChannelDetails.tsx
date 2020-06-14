@@ -54,7 +54,7 @@ export const ChannelDetails: React.FC = () => {
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto py-8">
+    <div className="max-w-screen-lg mx-auto py-4">
       <div className="lg:flex">
         <div className="w-full lg:w-auto">
           <img
@@ -73,7 +73,7 @@ export const ChannelDetails: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap mt-8">
+      <div className="flex flex-wrap mt-5">
         <div className="w-full">
           <span className="font-bold text-md ml-1">Overview</span>
           <PrettyTable items={overviewItems} />

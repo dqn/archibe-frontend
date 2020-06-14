@@ -43,8 +43,9 @@ export const Navigation: React.FC = () => {
         }`}
       >
         <div className="text-sm lg:flex-grow transition">
-          {links.map(({ text, to }) => (
+          {links.map(({ text, to }, i) => (
             <Link
+              key={i}
               to={to}
               className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
             >
