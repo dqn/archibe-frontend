@@ -8,6 +8,7 @@ import { getChats, GetChatsResponse } from '@/api/chats';
 import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
 import { ExternalLink } from '../molecules/ExternalLink';
 import { ChatViewer } from '../organisms/ChatViewer';
+import { SuperChats } from '../molecules/SuperChats';
 
 export const ChannelDetails: React.FC = () => {
   const { id } = useParams();
@@ -39,6 +40,14 @@ export const ChannelDetails: React.FC = () => {
     {
       title: 'Recieved chats',
       content: channel.receivedChatCount,
+    },
+    {
+      title: 'Sent Super Chat amount',
+      content: <SuperChats superChats={channel.sentSuperChats} />,
+    },
+    {
+      title: 'Received Super Chat amount',
+      content: <SuperChats superChats={channel.receivedSuperChats} />,
     },
     {
       title: 'Updated at',

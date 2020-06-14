@@ -1,3 +1,5 @@
+import { SuperChatAmountPerCurrencyUnit } from './chat';
+
 export type Channel = {
   id: number;
   channelId: string;
@@ -7,4 +9,6 @@ export type Channel = {
   updatedAt: string;
   sentChatCount: number;
   receivedChatCount: number;
+  sentSuperChats: SuperChatAmountPerCurrencyUnit[];
+  receivedSuperChats: SuperChatAmountPerCurrencyUnit[];
 };
