@@ -25,20 +25,24 @@ export const ChatList: React.FC = () => {
   const [query, setQuery] = useState('');
   const [chats, setChats] = useState<GetChatsResponse>([]);
 
+  // To reset react-infinite-scroller's state.
+  const [isSearching, setIsSearching] = useState(false);
+
   const handleQueryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    getChats({ ...parseQuery(query), order: 'desc' }).then(setChats);
     event.preventDefault();
+    setChats([]);
+    setIsSearching(true);
+    setTimeout(() => setIsSearching(false), 0);
   };
 
-  const handleChatViewerScroll = (offset: number, limit: number): Promise<number> => {
-    return getChats({ ...parseQuery(query), order: 'desc', offset, limit }).then((newChats) => {
-      setChats([...chats, ...newChats]);
-      return newChats.length;
-    });
+  const handleChatViewerScroll = async (offset: number, limit: number): Promise<number> => {
+    const newChats = await getChats({ ...parseQuery(query), order: 'desc', offset, limit });
+    setChats([...chats, ...newChats]);
+    return newChats.length;
   };
 
   return (
@@ -51,12 +55,14 @@ export const ChatList: React.FC = () => {
           />
         </form>
         <span className="font-bold text-md ml-1">Recent chats</span>
-        <ChatViewer
-          chats={chats}
-          onScroll={handleChatViewerScroll}
-          showChannelName={true}
-          showDatetime={true}
-        />
+        {!isSearching && (
+          <ChatViewer
+            chats={chats}
+            onScroll={handleChatViewerScroll}
+            showChannelName={true}
+            showDatetime={true}
+          />
+        )}
       </div>
     </>
   );
