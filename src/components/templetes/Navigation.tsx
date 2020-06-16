@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import useDarkMode from 'use-dark-mode';
+import Switch from 'react-switch';
 
 export const Navigation: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -55,13 +56,19 @@ export const Navigation: React.FC = () => {
             </Link>
           ))}
         </div>
-        <div>
-          <button type="button" onClick={darkMode.disable}>
-            ☀
-          </button>
-          <button type="button" onClick={darkMode.enable}>
-            ☾
-          </button>
+        <div className="mt-4 lg:mt-0">
+          <Switch
+            checked={darkMode.value}
+            onChange={darkMode.toggle}
+            onColor="#2a4365"
+            offColor="#f6ad55"
+            uncheckedIcon={
+              <div className="flex justify-center items-center h-100 text-lg text-white">☀</div>
+            }
+            checkedIcon={
+              <div className="flex justify-center items-center h-100 text-lg text-white">☾</div>
+            }
+          />
         </div>
       </div>
     </nav>
