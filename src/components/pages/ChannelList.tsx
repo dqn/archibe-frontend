@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { Tooltip } from 'react-tippy';
 import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
 import { ChannelDetails } from './ChannelDetails';
 import { GetChannelsResponse, getChannels } from '@/api/channels';
 import InfiniteScroll from 'react-infinite-scroller';
+import { improveImageQuality } from '@/lib/youtube';
 
 export const ChannelList: React.FC = () => {
   const match = useRouteMatch();
@@ -60,9 +62,25 @@ export const ChannelList: React.FC = () => {
                   }
                 >
                   {channels.map((channel, i) => (
-                    <li key={i} className="border-t py-2 mx-2 my-auto flex">
-                      <img src={channel.imageUrl} />
-                      <Link to={`${match.path}/${channel.channelId}`}>{channel.name}</Link>
+                    <li key={i} className="border rounded flex m-2 p-2">
+                      <img
+                        src={improveImageQuality(channel.imageUrl)}
+                        className="rounded-full w-16 h-16"
+                      />
+                      <div className="ml-2 flex items-center">
+                        <div>
+                          <Link to={`${match.path}/${channel.channelId}`} className="text-md">
+                            {channel.name}
+                          </Link>
+                          <div className="mt-2">
+                            {channel.badges?.map((badge, i) => (
+                              <Tooltip key={i} title={badge.label}>
+                                <img src={badge.imageUrl} className="w-6 h-6" />
+                              </Tooltip>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
                     </li>
                   ))}
                 </InfiniteScroll>

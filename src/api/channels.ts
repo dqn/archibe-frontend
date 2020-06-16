@@ -9,7 +9,9 @@ export type GetChannelsParams = {
   limit?: number;
 };
 
-export type GetChannelsResponse = Pick<Channel, 'id' | 'channelId' | 'name' | 'imageUrl'>[];
+export type GetChannelsResponse = (Pick<Channel, 'id' | 'channelId' | 'name' | 'imageUrl'> & {
+  badges?: Badge[];
+})[];
 
 export type GetChannelResponse = Channel & {
   badges?: Badge[];
