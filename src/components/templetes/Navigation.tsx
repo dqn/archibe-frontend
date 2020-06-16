@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useDarkMode from 'use-dark-mode';
 
 export const Navigation: React.FC = () => {
   const [isExpanded, setIsExpanded] = useState(false);
+  const darkMode = useDarkMode(false);
 
   const links = [
     {
@@ -54,9 +56,12 @@ export const Navigation: React.FC = () => {
           ))}
         </div>
         <div>
-          <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white mt-4 lg:mt-0">
-            Login
-          </a>
+          <button type="button" onClick={darkMode.disable}>
+            ☀
+          </button>
+          <button type="button" onClick={darkMode.enable}>
+            ☾
+          </button>
         </div>
       </div>
     </nav>
