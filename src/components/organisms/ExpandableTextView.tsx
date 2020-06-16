@@ -26,7 +26,7 @@ export const ExpandableTextView: React.FC<Props> = ({ text, expanded = false }) 
         <Linkify componentDecorator={componentDecorator}>{preprocess(text)}</Linkify>
       </div>
       <div className="mt-3">
-        <a onClick={() => setIsExpanded(!isExpanded)} className="link">
+        <a onClick={() => setIsExpanded(!isExpanded)} className="link cursor-pointer">
           {isExpanded ? 'show less' : 'show more'}
         </a>
       </div>

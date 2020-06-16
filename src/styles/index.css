@@ -5,10 +5,6 @@
   word-wrap: break-word;
 }
 
-a:hover {
-  border-bottom: 1px solid currentColor;
-}
-
 .link {
   color: #56b3b4;
 }
