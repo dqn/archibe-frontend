@@ -21,8 +21,8 @@ export const PrettyTable: React.FC<Props> = ({ items }) => {
       <tbody>
         {items.map((item, i) => (
           <tr key={i}>
-            <td className="border px-2 py-1">{item.title}</td>
-            <td className="border px-2 py-1">{item.content}</td>
+            <td className="border-b px-2 py-1">{item.title}</td>
+            <td className="border-b px-2 py-1">{item.content}</td>
           </tr>
         ))}
       </tbody>

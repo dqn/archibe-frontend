@@ -14,8 +14,8 @@ export type GetChannelsResponse = (Pick<Channel, 'id' | 'channelId' | 'name' | '
 })[];
 
 export type GetChannelResponse = Channel & {
-  badges?: Badge[];
-  videos?: Video[];
+  badges: Badge[];
+  videos: Video[];
 };
 
 export async function getChannels(params: GetChannelsParams): Promise<GetChannelsResponse> {

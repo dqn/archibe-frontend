@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
 import dayjs from 'dayjs';
 import { getChannel, GetChannelResponse } from '@/api/channels';
@@ -63,7 +63,7 @@ export const ChannelDetails: React.FC = () => {
   };
 
   return (
-    <div className="max-w-screen-lg mx-auto py-4">
+    <div className="max-w-screen-lg mx-auto mt-10">
       <div className="lg:flex">
         <div className="w-full lg:w-auto">
           <img
@@ -87,7 +87,29 @@ export const ChannelDetails: React.FC = () => {
           <span className="font-bold text-md ml-1">Overview</span>
           <PrettyTable items={overviewItems} />
         </div>
-        <div className="w-full mt-6">
+        <div className="mt-6">
+          <span className="font-bold text-md ml-1">Videos</span>
+          <div className="flex flex-wrap">
+            {channel.videos.map((video, i) => (
+              <div key={i} className="w-full lg:w-1/2 lg:px-2 mb-6">
+                <div className="relative">
+                  <img src={video.thumbnailUrl} className="" />
+                  <div className="opacity-75 bg-black text-white absolute right-0 bottom-0 px-2 m-2 rounded">
+                    {dayjs()
+                      .startOf('day')
+                      .add(video.lengthSeconds, 's')
+                      .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'H:mm:ss')}
+                  </div>
+                </div>
+                <Link to={`/videos/${video.videoId}`}>
+                  {video.title}
+                  <span>（{dayjs(video.liveStartedAt).format('YYYY/MM/DD')}）</span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-full">
           <span className="font-bold text-md ml-1">Recent chats</span>
           <ChatViewer chats={chats} onScroll={handleChatViewerScroll} showDatetime={true} />
         </div>

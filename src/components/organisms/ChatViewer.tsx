@@ -42,7 +42,7 @@ export const ChatViewer: React.FC<Props> = ({
         }
       >
         {chats.map((chat, i) => (
-          <li key={i} className="border-t py-2 mx-2 my-auto flex">
+          <li key={i} className="py-2 mx-2 my-auto flex">
             {chat.type === 'chat' ? (
               <ChatItem
                 chat={chat}
