@@ -44,11 +44,13 @@
 body.light-mode {
   color: #111;
   background-color: #fff;
+  transition: background-color 0.15s linear;
 }
 
 body.dark-mode {
   color: #fff;
   background-color: #181818;
+  transition: background-color 0.15s linear;
 }
 
 body.dark-mode input {
