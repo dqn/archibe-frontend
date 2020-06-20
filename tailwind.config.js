@@ -1,7 +1,12 @@
 module.exports = {
   purge: ['./src/**/*.html', './src/**/*.tsx'],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        owner: '#ffd600',
+        moderator: '#5e84f1',
+      },
+    },
   },
   variants: {
     backgroundColor: ['odd', 'even'],

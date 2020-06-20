@@ -55,9 +55,9 @@ export const ChatItem: React.FC<Props> = ({
           <span
             className={`ml-2 ${
               isOwner
-                ? 'owner-channel-name'
+                ? 'bg-owner p-1 text-black rounded font-semibold'
                 : isModerator
-                ? 'moderator-color'
+                ? 'text-moderator'
                 : isMember
                 ? 'chat-member-color'
                 : 'chat-channel-name'
