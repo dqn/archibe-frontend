@@ -99,8 +99,8 @@ export const VideoDetails: React.FC = () => {
         <ChatViewer
           chats={chats}
           onScroll={handleChatViewerScroll}
-          showChannelName={true}
-          showOffsetTime={true}
+          showChannelName
+          showOffsetTime
         />
       </div>
     </div>

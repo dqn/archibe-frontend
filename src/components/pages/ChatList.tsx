@@ -59,8 +59,8 @@ export const ChatList: React.FC = () => {
           <ChatViewer
             chats={chats}
             onScroll={handleChatViewerScroll}
-            showChannelName={true}
-            showDatetime={true}
+            showChannelName
+            showDatetime
           />
         )}
       </div>

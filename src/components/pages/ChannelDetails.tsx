@@ -111,7 +111,7 @@ export const ChannelDetails: React.FC = () => {
         </div>
         <div className="w-full">
           <span className="font-bold text-md ml-1">Recent chats</span>
-          <ChatViewer chats={chats} onScroll={handleChatViewerScroll} showDatetime={true} />
+          <ChatViewer chats={chats} onScroll={handleChatViewerScroll} showDatetime />
         </div>
       </div>
     </div>
