@@ -4,7 +4,7 @@ import { Home } from './components/pages/Home';
 import { Navigation } from './components/templetes/Navigation';
 import { ChannelList } from './components/pages/ChannelList';
 import { VideoList } from './components/pages/VideoList';
-import { ChatList } from './components/pages/ChatList';
+// import { ChatList } from './components/pages/ChatList';
 
 export const App: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ export const App: React.FC = () => {
       <Switch>
         <Route path="/channels" component={ChannelList} />
         <Route path="/videos" component={VideoList} />
-        <Route path="/chats" component={ChatList} />
+        {/* <Route path="/chats" component={ChatList} /> */}
         <Route exact path="/" component={Home} />
       </Switch>
     </Router>

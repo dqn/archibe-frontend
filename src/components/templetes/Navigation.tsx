@@ -12,10 +12,10 @@ export const Navigation: React.FC = () => {
       text: 'Channels',
       to: '/channels',
     },
-    {
-      text: 'Chats',
-      to: '/chats',
-    },
+    // {
+    //   text: 'Chats',
+    //   to: '/chats',
+    // },
   ] as const;
 
   return (
