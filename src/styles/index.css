@@ -25,32 +25,42 @@ body.dark-mode {
   transition: background-color 0.15s linear;
 }
 
-body.light-mode .chat-member-color {
-  color: #107516;
+body.light-mode .chat-channel-name-verified {
+  color: #606060;
+  background-color: #e9e9e9;
 }
 
-body.light-mode .chat-time {
-  color: #11111168;
+body.light-mode .chat-channel-name-member {
+  color: #107516;
 }
 
 body.light-mode .chat-channel-name {
   color: #11111199;
 }
 
+body.light-mode .chat-time {
+  color: #11111168;
+}
+
 body.light-mode .chat-text {
   color: #111;
 }
 
-body.dark-mode .chat-member-color {
-  color: #2ba640;
+body.dark-mode .chat-channel-name-verified {
+  color: #cccccc;
+  background-color: #606060;
 }
 
-body.dark-mode .chat-time {
-  color: #ffffff8a;
+body.dark-mode .chat-channel-name-member {
+  color: #2ba640;
 }
 
 body.dark-mode .chat-channel-name {
   color: #ffffffb2;
+}
+
+body.dark-mode .chat-time {
+  color: #ffffff8a;
 }
 
 body.dark-mode .chat-text {
