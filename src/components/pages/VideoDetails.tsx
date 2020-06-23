@@ -9,6 +9,7 @@ import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
 import { ExternalLink } from '../atoms/ExternalLink';
 import { ChatViewer } from '../organisms/ChatViewer';
 import { SuperChats } from '../molecules/SuperChats';
+import styled from 'styled-components';
 
 export const VideoDetails: React.FC = () => {
   const { id } = useParams();
@@ -80,12 +81,12 @@ export const VideoDetails: React.FC = () => {
   return (
     <div className="max-w-screen-lg mx-auto py-8">
       <div className="sticky top-0 lg:relative lg:top-auto">
-        <div className="relative h-0" style={{ paddingBottom: '56.25%' /* 16:9 */ }}>
+        <YouTubeWrapper className="relative h-0">
           <iframe
             className="absolute top-0 right-0 bottom-0 left-0 w-full h-full"
             src={`https://www.youtube.com/embed/${video.videoId}`}
           />
-        </div>
+        </YouTubeWrapper>
       </div>
       <div className="pl-1 pt-1">
         <h3 className="font-bold text-xl">{video.title}</h3>
@@ -109,3 +110,7 @@ export const VideoDetails: React.FC = () => {
     </div>
   );
 };
+
+const YouTubeWrapper = styled.div`
+  padding-bottom: 56.25%; /* 16:9 */
+`;
