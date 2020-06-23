@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Linkify from 'react-linkify';
-import { ExternalLink } from '../molecules/ExternalLink';
+import { ExternalLink } from '../atoms/ExternalLink';
 
 export type Props = {
   text: string;

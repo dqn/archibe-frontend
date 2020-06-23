@@ -6,7 +6,7 @@ import { getVideo, GetVideoResponse } from '@/api/videos';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { ExpandableTextView } from '../organisms/ExpandableTextView';
 import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
-import { ExternalLink } from '../molecules/ExternalLink';
+import { ExternalLink } from '../atoms/ExternalLink';
 import { ChatViewer } from '../organisms/ChatViewer';
 import { SuperChats } from '../molecules/SuperChats';
 
