@@ -10,7 +10,7 @@ export type GetChannelsParams = {
 };
 
 export type GetChannelsResponse = (Pick<Channel, 'id' | 'channelId' | 'name' | 'imageUrl'> & {
-  badges?: Badge[];
+  badges: Badge[];
 })[];
 
 export type GetChannelResponse = Channel & {

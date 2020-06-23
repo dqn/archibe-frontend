@@ -73,7 +73,7 @@ export const ChannelList: React.FC = () => {
                             {channel.name}
                           </Link>
                           <div className="mt-2">
-                            {channel.badges?.map((badge, i) => (
+                            {channel.badges.map((badge, i) => (
                               <Tooltip key={i} title={badge.label}>
                                 <img src={badge.imageUrl} className="w-6 h-6" />
                               </Tooltip>

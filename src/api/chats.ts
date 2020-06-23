@@ -16,7 +16,7 @@ export type GetChatsParams = {
 export type GetChatsResponse = (Chat & {
   channel: Channel;
   video: Video;
-  badges?: Badge[];
+  badges: Badge[];
 })[];
 
 export async function getChats(params: GetChatsParams): Promise<GetChatsResponse> {

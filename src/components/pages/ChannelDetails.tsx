@@ -6,7 +6,7 @@ import { getChannel, GetChannelResponse } from '@/api/channels';
 import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
-import { ExternalLink } from '../molecules/ExternalLink';
+import { ExternalLink } from '../atoms/ExternalLink';
 import { ChatViewer } from '../organisms/ChatViewer';
 import { SuperChats } from '../molecules/SuperChats';
 
@@ -74,11 +74,13 @@ export const ChannelDetails: React.FC = () => {
         <div className="font-bold text-center mt-3 text-3xl mx-3 lg:ml-8">
           <div className="lg:text-left">{channel.name}</div>
           <div className="flex justify-center lg:justify-start">
-            {channel.badges?.map((badge, i) => (
-              <Tooltip key={i} title={badge.label}>
-                <img src={badge.imageUrl} className="w-6 h-6" />
-              </Tooltip>
-            ))}
+            {channel.badges
+              .filter((badge) => badge.badgeType === 'member')
+              .map((badge, i) => (
+                <Tooltip key={i} title={badge.label}>
+                  <img src={badge.imageUrl} className="w-6 h-6" />
+                </Tooltip>
+              ))}
           </div>
         </div>
       </div>
