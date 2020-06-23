@@ -1,12 +1,14 @@
-import React from 'react';
 import dayjs from 'dayjs';
-import styled from 'styled-components';
-import { Tooltip } from 'react-tippy';
-import ModeratorIcon from '@/assets/moderator.svg';
-import { GetChatsResponse } from '@/api/chats';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { ChatMessage } from '../molecules/ChatMessage';
+import { Tooltip } from 'react-tippy';
+import styled from 'styled-components';
+
+import { GetChatsResponse } from '@/api/chats';
+import ModeratorIcon from '@/assets/moderator.svg';
+
 import { DiscolorableVerifiedIcon } from '../atoms/DiscolorableVerifiedIcon';
+import { ChatMessage } from '../molecules/ChatMessage';
 
 export type Props = {
   chat: GetChatsResponse[number];

@@ -1,6 +1,7 @@
-import { client } from './client';
-import { Video } from '@/types/models/video';
 import { Channel } from '@/types/models/channel';
+import { Video } from '@/types/models/video';
+
+import { client } from './client';
 
 export type GetVideoResponse = Video & {
   channel: Channel;

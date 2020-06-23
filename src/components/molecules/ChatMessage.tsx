@@ -1,7 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { MessageElement } from '@/types/models/chat';
 import { Tooltip } from 'react-tippy';
+import styled from 'styled-components';
+
+import { MessageElement } from '@/types/models/chat';
 
 export type Props = {
   messageElements: MessageElement[];

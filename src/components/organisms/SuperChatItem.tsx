@@ -1,10 +1,12 @@
-import React from 'react';
-import { ChatMessage } from '../molecules/ChatMessage';
-import { SuperChat } from '@/types/models/chat';
-import { Channel } from '@/types/models/channel';
-import { formatPurchaseAmount } from '@/lib/youtube';
-import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
+import React from 'react';
+import { Link } from 'react-router-dom';
+
+import { formatPurchaseAmount } from '@/lib/youtube';
+import { Channel } from '@/types/models/channel';
+import { SuperChat } from '@/types/models/chat';
+
+import { ChatMessage } from '../molecules/ChatMessage';
 
 export type Props = {
   chat: SuperChat & { channel: Channel };

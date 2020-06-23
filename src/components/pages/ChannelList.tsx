@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { Tooltip } from 'react-tippy';
-import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
-import { ChannelDetails } from './ChannelDetails';
-import { GetChannelsResponse, getChannels } from '@/api/channels';
 import InfiniteScroll from 'react-infinite-scroller';
+import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+import { Tooltip } from 'react-tippy';
+
+import { getChannels, GetChannelsResponse } from '@/api/channels';
 import { improveImageQuality } from '@/lib/youtube';
+
+import { ChannelDetails } from './ChannelDetails';
 
 export const ChannelList: React.FC = () => {
   const match = useRouteMatch();

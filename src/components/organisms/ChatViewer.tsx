@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { GetChatsResponse } from '@/api/chats';
 import InfiniteScroll from 'react-infinite-scroller';
+
+import { GetChatsResponse } from '@/api/chats';
+
 import { ChatItem } from './ChatItem';
 import { SuperChatItem } from './SuperChatItem';
 

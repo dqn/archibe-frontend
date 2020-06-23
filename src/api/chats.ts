@@ -1,8 +1,9 @@
-import { client } from './client';
+import { Badge } from '@/types/models/badge';
 import { Channel } from '@/types/models/channel';
 import { Chat } from '@/types/models/chat';
-import { Badge } from '@/types/models/badge';
 import { Video } from '@/types/models/video';
+
+import { client } from './client';
 
 export type GetChatsParams = {
   q?: string;

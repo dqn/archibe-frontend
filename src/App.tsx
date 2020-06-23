@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
-import { Home } from './components/pages/Home';
-import { Navigation } from './components/templetes/Navigation';
+
 import { ChannelList } from './components/pages/ChannelList';
+import { Home } from './components/pages/Home';
 import { VideoList } from './components/pages/VideoList';
+import { Navigation } from './components/templetes/Navigation';
+
 // import { ChatList } from './components/pages/ChatList';
 
 export const App: React.FC = () => {

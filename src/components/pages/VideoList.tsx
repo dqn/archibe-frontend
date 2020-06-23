@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link, useRouteMatch, Switch, Route } from 'react-router-dom';
+import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
+
 import { VideoDetails } from './VideoDetails';
 
 export const VideoList: React.FC = () => {

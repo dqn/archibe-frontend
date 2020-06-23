@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { GetChatsResponse, getChats, GetChatsParams } from '@/api/chats';
+
+import { getChats, GetChatsParams, GetChatsResponse } from '@/api/chats';
+
 import { ChatViewer } from '../organisms/ChatViewer';
 
 function parseQuery(query: string): GetChatsParams {

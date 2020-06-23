@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { Tooltip } from 'react-tippy';
 import dayjs from 'dayjs';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { Tooltip } from 'react-tippy';
+
 import { getChannel, GetChannelResponse } from '@/api/channels';
-import { improveImageQuality } from '@/lib/youtube';
 import { getChats, GetChatsResponse } from '@/api/chats';
-import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
+import { improveImageQuality } from '@/lib/youtube';
+
 import { ExternalLink } from '../atoms/ExternalLink';
-import { ChatViewer } from '../organisms/ChatViewer';
 import { SuperChats } from '../molecules/SuperChats';
+import { ChatViewer } from '../organisms/ChatViewer';
+import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
 
 export const ChannelDetails: React.FC = () => {
   const { id } = useParams();

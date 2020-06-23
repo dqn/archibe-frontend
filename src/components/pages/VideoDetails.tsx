@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
-import { useParams, Link } from 'react-router-dom';
-
-import { getVideo, GetVideoResponse } from '@/api/videos';
-import { getChats, GetChatsResponse } from '@/api/chats';
-import { ExpandableTextView } from '../organisms/ExpandableTextView';
-import { PrettyTableItem, PrettyTable } from '../organisms/PrettyTable';
-import { ExternalLink } from '../atoms/ExternalLink';
-import { ChatViewer } from '../organisms/ChatViewer';
-import { SuperChats } from '../molecules/SuperChats';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { getChats, GetChatsResponse } from '@/api/chats';
+import { getVideo, GetVideoResponse } from '@/api/videos';
+
+import { ExternalLink } from '../atoms/ExternalLink';
+import { SuperChats } from '../molecules/SuperChats';
+import { ChatViewer } from '../organisms/ChatViewer';
+import { ExpandableTextView } from '../organisms/ExpandableTextView';
+import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
 
 export const VideoDetails: React.FC = () => {
   const { id } = useParams();
