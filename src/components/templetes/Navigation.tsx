@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import useDarkMode from 'use-dark-mode';
 import Switch from 'react-switch';
 
-export const Navigation: React.FC = () => {
+type Props = {
+  isDarkMode: boolean;
+  onToggleTheme: (checked: boolean) => void;
+};
+
+export const Navigation: React.FC<Props> = ({ isDarkMode, onToggleTheme }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const darkMode = useDarkMode(false);
 
   const links = [
     {
@@ -58,8 +61,8 @@ export const Navigation: React.FC = () => {
         </div>
         <div className="mt-4 lg:mt-0">
           <Switch
-            checked={darkMode.value}
-            onChange={darkMode.toggle}
+            checked={isDarkMode}
+            onChange={onToggleTheme}
             onColor="#2a4365"
             offColor="#f6ad55"
             uncheckedIcon={
