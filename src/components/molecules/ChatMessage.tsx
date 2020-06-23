@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { MessageElement } from '@/types/models/chat';
 import { Tooltip } from 'react-tippy';
 
@@ -12,7 +13,7 @@ export const ChatMessage: React.FC<Props> = ({ messageElements }) => {
       {messageElements.map((me, i) => (
         <span key={i}>
           {me.type === 'text' ? (
-            <span>{me.text}</span>
+            <ChatText>{me.text}</ChatText>
           ) : (
             <Tooltip title={me.label}>
               <img className="w-6 h-6 mx-1 inline" src={me.imageUrl} />
@@ -23,3 +24,7 @@ export const ChatMessage: React.FC<Props> = ({ messageElements }) => {
     </>
   );
 };
+
+const ChatText = styled.span`
+  color: ${({ theme }) => theme.chat.textColor};
+`;

@@ -86,38 +86,17 @@ const GlobalStyles = createGlobalStyle<{ theme: AppTheme }>`
   word-wrap: break-word;
 }
 
-input {
-  color: #000;
-}
-
-.link {
-  color: #56b3b4;
-}
-
 body {
   color: ${({ theme }) => theme.color};
   background-color: ${({ theme }) => theme.bg};
   transition: background-color 0.15s linear;
 }
 
-.chat-channel-name {
-  color: ${({ theme }) => theme.chat.channelName.normalColor};
+input {
+  color: #000;
 }
 
-.chat-channel-name-member {
-  color: ${({ theme }) => theme.chat.channelName.memberColor};
-}
-
-.chat-channel-name-verified {
-  color: ${({ theme }) => theme.chat.channelName.verifiedColor};
-  background-color: ${({ theme }) => theme.chat.channelName.verifiedBg};
-}
-
-.chat-text {
-  color: ${({ theme }) => theme.chat.textColor};
-}
-
-.chat-time {
-  color: ${({ theme }) => theme.chat.timeColor};
+.link {
+  color: #56b3b4;
 }
 `;

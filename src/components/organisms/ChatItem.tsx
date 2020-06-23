@@ -1,5 +1,6 @@
 import React from 'react';
 import dayjs from 'dayjs';
+import styled from 'styled-components';
 import { Tooltip } from 'react-tippy';
 import ModeratorIcon from '@/assets/moderator.svg';
 import { GetChatsResponse } from '@/api/chats';
@@ -49,37 +50,39 @@ export const ChatItem: React.FC<Props> = ({
     }
   });
 
+  const channelLink = <Link to={`/channels/${chat.channel.channelId}`}>{chat.channel.name}</Link>;
+
   return (
     <>
       <img src={chat.channel.imageUrl} className="rounded-full w-6 h-6" />
       <div className="ml-2">
-        {showOffsetTime && <span className="chat-time">{chat.timestamp}</span>}
+        {showOffsetTime && <ChatTime>{chat.timestamp}</ChatTime>}
         {showDatetime && (
-          <span className="ml-2">
-            <Link to={`/videos/${chat.videoId}`} className="chat-time">
+          <ChatTime className="ml-2">
+            <Link to={`/videos/${chat.videoId}`}>
               {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD HH:mm')}
             </Link>
-          </span>
+          </ChatTime>
         )}
         {showChannelName && (
-          <span
-            className={`ml-2 ${
-              isOwner
-                ? 'bg-owner p-1 text-black rounded-sm font-semibold'
-                : isModerator
-                ? 'text-moderator'
-                : isVerified
-                ? 'chat-channel-name-verified p-1 rounded-sm font-semibold'
-                : isMember
-                ? 'chat-channel-name-member'
-                : 'chat-channel-name'
-            }`}
-          >
-            <Link to={`/channels/${chat.channel.channelId}`}>{chat.channel.name}</Link>
-            {isVerified && (
-              <span className="ml-1">
-                <DiscolorableVerifiedIcon />
+          <span className="ml-2">
+            {isOwner ? (
+              <span className="bg-owner p-1 text-black rounded-sm font-semibold">
+                {channelLink}
               </span>
+            ) : isModerator ? (
+              <span className="text-moderator">{channelLink}</span>
+            ) : isVerified ? (
+              <ChannelNameVerified>
+                {channelLink}
+                <span className="ml-1">
+                  <DiscolorableVerifiedIcon />
+                </span>
+              </ChannelNameVerified>
+            ) : isMember ? (
+              <ChannelNameMember>{channelLink}</ChannelNameMember>
+            ) : (
+              <ChannelNameNormal>{channelLink}</ChannelNameNormal>
             )}
           </span>
         )}
@@ -98,3 +101,20 @@ export const ChatItem: React.FC<Props> = ({
     </>
   );
 };
+
+const ChannelNameNormal = styled.span`
+  color: ${({ theme }) => theme.chat.channelName.normalColor};
+`;
+
+const ChannelNameMember = styled.span`
+  color: ${({ theme }) => theme.chat.channelName.memberColor};
+`;
+
+const ChannelNameVerified = styled.span`
+  color: ${({ theme }) => theme.chat.channelName.verifiedColor};
+  background-color: ${({ theme }) => theme.chat.channelName.verifiedBg};
+`;
+
+const ChatTime = styled.span`
+  color: ${({ theme }) => theme.chat.timeColor};
+`;
