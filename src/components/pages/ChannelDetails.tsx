@@ -1,7 +1,8 @@
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
+import styled from 'styled-components';
 
 import { getChannel, GetChannelResponse } from '@/api/channels';
 import { getChats, GetChatsResponse } from '@/api/chats';
@@ -14,6 +15,7 @@ import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
 
 export const ChannelDetails: React.FC = () => {
   const { id } = useParams();
+  const history = useHistory();
 
   const [channel, setChannel] = useState<GetChannelResponse>();
   const [chats, setChats] = useState<GetChatsResponse>([]);
@@ -95,9 +97,12 @@ export const ChannelDetails: React.FC = () => {
           <span className="font-bold text-md ml-1">Videos</span>
           <div className="flex flex-wrap">
             {channel.videos.map((video, i) => (
-              <div key={i} className="w-full lg:w-1/2 lg:px-2 mb-6">
-                <div className="relative">
-                  <img src={video.thumbnailUrl} className="" />
+              <div key={i} className="w-full lg:w-1/4 flex flex-wrap lg:px-2 mb-6">
+                <div
+                  className="w-1/2 lg:w-full relative cursor-pointer"
+                  onClick={() => history.push(`/videos/${video.videoId}`)}
+                >
+                  <img src={video.thumbnailUrl} />
                   <div className="opacity-75 bg-black text-white absolute right-0 bottom-0 px-2 m-2 rounded">
                     {dayjs()
                       .startOf('day')
@@ -105,10 +110,12 @@ export const ChannelDetails: React.FC = () => {
                       .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'H:mm:ss')}
                   </div>
                 </div>
-                <Link to={`/videos/${video.videoId}`}>
-                  {video.title}
-                  <span>（{dayjs(video.liveStartedAt).format('YYYY/MM/DD')}）</span>
-                </Link>
+                <div className="w-1/2 lg:w-full pl-1 lg:pl-0 text-sm">
+                  <Link to={`/videos/${video.videoId}`}>
+                    <VideoTitle>{video.title}</VideoTitle>
+                  </Link>
+                  <div className="mt-1">{dayjs(video.liveStartedAt).format('YYYY/MM/DD')}</div>
+                </div>
               </div>
             ))}
           </div>
@@ -121,3 +128,10 @@ export const ChannelDetails: React.FC = () => {
     </div>
   );
 };
+
+const VideoTitle = styled.span`
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+`;
