@@ -14,10 +14,16 @@ export const Tabs: React.FC<Props> = ({ tabs, defaultTabName }) => {
 
   return (
     <>
-      <div className="flex justify-between bg-gray-900">
-        {tabs.map((it) => (
-          <div className="w-full flex" onClick={() => setTab(it.name)}>
-            <div className="mx-auto mt-6">{it.name}</div>
+      <div className="flex justify-between">
+        {tabs.map((it, i) => (
+          <div
+            key={i}
+            className={`w-full flex py-3 cursor-pointer ${
+              it.name === tab && 'border-b-4 font-semibold'
+            }`}
+            onClick={() => setTab(it.name)}
+          >
+            <div className="mx-auto">{it.name}</div>
           </div>
         ))}
       </div>
