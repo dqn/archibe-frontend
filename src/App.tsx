@@ -6,6 +6,7 @@ import { ChannelList } from './components/pages/ChannelList';
 import { Home } from './components/pages/Home';
 import { VideoDetails } from './components/pages/VideoDetails';
 import { Navigation } from './components/templetes/Navigation';
+import { AppTheme, darkTheme, lightTheme } from './lib/theme';
 
 // import { ChatList } from './components/pages/ChatList';
 
@@ -35,51 +36,6 @@ export const App: React.FC = () => {
       </Router>
     </ThemeProvider>
   );
-};
-
-type AppTheme = {
-  bg: string;
-  color: string;
-  chat: {
-    channelName: {
-      normalColor: string;
-      memberColor: string;
-      verifiedColor: string;
-      verifiedBg: string;
-    };
-    textColor: string;
-    timeColor: string;
-  };
-};
-
-const lightTheme: AppTheme = {
-  bg: '#fff',
-  color: '#111',
-  chat: {
-    channelName: {
-      normalColor: '#11111199',
-      memberColor: '#107516',
-      verifiedColor: '#606060',
-      verifiedBg: '#e9e9e9',
-    },
-    textColor: '#111',
-    timeColor: '#11111168',
-  },
-};
-
-const darkTheme: AppTheme = {
-  bg: '#181818',
-  color: '#fff',
-  chat: {
-    channelName: {
-      normalColor: '#ffffffb2',
-      memberColor: '#2ba640',
-      verifiedColor: '#cccccc',
-      verifiedBg: '#e9e9e9',
-    },
-    textColor: '#fff',
-    timeColor: '#ffffff8a',
-  },
 };
 
 const GlobalStyles = createGlobalStyle<{ theme: AppTheme }>`
