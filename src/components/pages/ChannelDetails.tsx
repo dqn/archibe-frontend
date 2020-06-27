@@ -1,8 +1,7 @@
 import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Tooltip } from 'react-tippy';
-import styled from 'styled-components';
 
 import { getChannel, GetChannelResponse } from '@/api/channels';
 import { getChats, GetChatsResponse } from '@/api/chats';
@@ -12,10 +11,11 @@ import { ExternalLink } from '../atoms/ExternalLink';
 import { SuperChats } from '../molecules/SuperChats';
 import { ChatViewer } from '../organisms/ChatViewer';
 import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
+import { VideoList } from '../organisms/VideoList';
+import { Tabs } from '../templetes/Tabs';
 
 export const ChannelDetails: React.FC = () => {
   const { id } = useParams();
-  const history = useHistory();
 
   const [channel, setChannel] = useState<GetChannelResponse>();
   const [chats, setChats] = useState<GetChatsResponse>([]);
@@ -93,45 +93,27 @@ export const ChannelDetails: React.FC = () => {
           <span className="font-bold text-md ml-1">Overview</span>
           <PrettyTable items={overviewItems} />
         </div>
-        <div className="mt-6">
-          <span className="font-bold text-md ml-1">Videos</span>
-          <div className="flex flex-wrap">
-            {channel.videos.map((video, i) => (
-              <div key={i} className="w-full lg:w-1/4 flex flex-wrap lg:px-2 mb-6">
-                <div
-                  className="w-1/2 lg:w-full relative cursor-pointer"
-                  onClick={() => history.push(`/videos/${video.videoId}`)}
-                >
-                  <img src={video.thumbnailUrl} />
-                  <div className="opacity-75 bg-black text-white absolute right-0 bottom-0 px-2 m-2 rounded">
-                    {dayjs()
-                      .startOf('day')
-                      .add(video.lengthSeconds, 's')
-                      .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'H:mm:ss')}
-                  </div>
-                </div>
-                <div className="w-1/2 lg:w-full pl-1 lg:pl-0 text-sm">
-                  <Link to={`/videos/${video.videoId}`}>
-                    <VideoTitle>{video.title}</VideoTitle>
-                  </Link>
-                  <div className="mt-1">{dayjs(video.liveStartedAt).format('YYYY/MM/DD')}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="w-full">
-          <span className="font-bold text-md ml-1">Recent chats</span>
-          <ChatViewer chats={chats} onScroll={handleChatViewerScroll} showDatetime />
-        </div>
       </div>
+      <Tabs
+        tabs={[
+          {
+            name: 'CHATS',
+            content: (
+              <div className="mt-2">
+                <ChatViewer chats={chats} onScroll={handleChatViewerScroll} showDatetime />
+              </div>
+            ),
+          },
+          {
+            name: 'VIDEOS',
+            content: (
+              <div className="mt-4">
+                <VideoList videos={channel.videos} />
+              </div>
+            ),
+          },
+        ]}
+      />
     </div>
   );
 };
-
-const VideoTitle = styled.span`
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-`;
