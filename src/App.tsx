@@ -4,7 +4,7 @@ import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { ChannelList } from './components/pages/ChannelList';
 import { Home } from './components/pages/Home';
-import { VideoList } from './components/pages/VideoList';
+import { VideoDetails } from './components/pages/VideoDetails';
 import { Navigation } from './components/templetes/Navigation';
 
 // import { ChatList } from './components/pages/ChatList';
@@ -28,7 +28,7 @@ export const App: React.FC = () => {
 
         <Switch>
           <Route path="/channels" component={ChannelList} />
-          <Route path="/videos" component={VideoList} />
+          <Route path="/videos/:id" component={VideoDetails} />
           {/* <Route path="/chats" component={ChatList} /> */}
           <Route exact path="/" component={Home} />
         </Switch>
