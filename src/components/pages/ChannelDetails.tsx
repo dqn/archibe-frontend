@@ -5,6 +5,7 @@ import { Tooltip } from 'react-tippy';
 
 import { getChannel, GetChannelResponse } from '@/api/channels';
 import { getChats, GetChatsResponse } from '@/api/chats';
+import { getVideos, GetVideosResponse } from '@/api/videos';
 import { improveImageQuality } from '@/lib/youtube';
 
 import { ExternalLink } from '../atoms/ExternalLink';
@@ -19,6 +20,7 @@ export const ChannelDetails: React.FC = () => {
 
   const [channel, setChannel] = useState<GetChannelResponse>();
   const [chats, setChats] = useState<GetChatsResponse>([]);
+  const [videos, setVideos] = useState<GetVideosResponse>([]);
 
   useEffect(() => {
     getChannel(id).then(setChannel);
@@ -66,6 +68,13 @@ export const ChannelDetails: React.FC = () => {
     });
   };
 
+  const handleVideoListScroll = (offset: number, limit: number): Promise<number> => {
+    return getVideos({ channelId: id, offset, limit, order: 'desc' }).then((newVideos) => {
+      setVideos([...videos, ...newVideos]);
+      return newVideos.length;
+    });
+  };
+
   return (
     <div className="max-w-screen-lg mx-auto mt-10">
       <div className="lg:flex">
@@ -108,7 +117,7 @@ export const ChannelDetails: React.FC = () => {
             name: 'VIDEOS',
             content: (
               <div className="mt-4">
-                <VideoList videos={channel.videos} />
+                <VideoList videos={videos} onScroll={handleVideoListScroll} />
               </div>
             ),
           },
