@@ -35,7 +35,7 @@ export const VideoList: React.FC<Props> = ({ videos, onScroll, videosPerPage = 3
     >
       <div className="flex flex-wrap">
         {videos.map((video, i) => (
-          <div key={i} className="w-full lg:w-1/4 flex flex-wrap lg:px-2 mb-6">
+          <div key={i} className="w-full lg:w-1/4 flex flex-wrap lg:px-2 mb-2">
             <div
               className="w-1/2 lg:w-full relative cursor-pointer"
               onClick={() => history.push(`/videos/${video.videoId}`)}
