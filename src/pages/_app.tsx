@@ -1,4 +1,5 @@
-import '../styles.css';
+import '@/styles.css';
+import 'react-tippy/dist/tippy.css';
 
 import { AppProps } from 'next/app';
 import { useState } from 'react';
