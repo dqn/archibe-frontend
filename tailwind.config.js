@@ -8,8 +8,6 @@ module.exports = {
       },
     },
   },
-  variants: {
-    backgroundColor: ['odd', 'even'],
-  },
+  variants: {},
   plugins: [],
 };

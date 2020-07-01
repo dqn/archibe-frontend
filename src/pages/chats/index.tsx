@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { NextPage } from 'next';
+import { useState } from 'react';
 
 import { getChats, GetChatsParams, GetChatsResponse } from '@/api/chats';
-
-import { ChatViewer } from '../organisms/ChatViewer';
+import { ChatViewer } from '@/components/organisms/ChatViewer';
 
 function parseQuery(query: string): GetChatsParams {
   const qArray: string[] = [];
@@ -23,7 +23,7 @@ function parseQuery(query: string): GetChatsParams {
   return params;
 }
 
-export const ChatList: React.FC = () => {
+export const ChatList: NextPage = () => {
   const [query, setQuery] = useState('');
   const [chats, setChats] = useState<GetChatsResponse>([]);
 
@@ -69,3 +69,5 @@ export const ChatList: React.FC = () => {
     </>
   );
 };
+
+export default ChatList;

@@ -3,6 +3,6 @@ import applyCaseMiddleware from 'axios-case-converter';
 
 export const client = applyCaseMiddleware(
   axios.create({
-    baseURL: 'http://localhost:8080/api/',
+    baseURL: process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : 'TODO',
   }),
 );

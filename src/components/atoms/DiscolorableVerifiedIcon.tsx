@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const DiscolorableVerifiedIcon: React.FC = () => {
   return (
     <svg

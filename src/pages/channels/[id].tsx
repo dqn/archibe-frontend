@@ -1,34 +1,35 @@
 import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { GetServerSideProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 import { Tooltip } from 'react-tippy';
 
 import { getChannel, GetChannelResponse } from '@/api/channels';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { getVideos, GetVideosResponse } from '@/api/videos';
+import { ExternalLink } from '@/components/atoms/ExternalLink';
+import { SuperChats } from '@/components/molecules/SuperChats';
+import { ChatViewer } from '@/components/organisms/ChatViewer';
+import { PrettyTable, PrettyTableItem } from '@/components/organisms/PrettyTable';
+import { VideoList } from '@/components/organisms/VideoList';
+import { Tabs } from '@/components/templetes/Tabs';
 import { improveImageQuality } from '@/lib/youtube';
 
-import { ExternalLink } from '../atoms/ExternalLink';
-import { SuperChats } from '../molecules/SuperChats';
-import { ChatViewer } from '../organisms/ChatViewer';
-import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
-import { VideoList } from '../organisms/VideoList';
-import { Tabs } from '../templetes/Tabs';
+type Props = {
+  channel: GetChannelResponse;
+};
 
-export const ChannelDetails: React.FC = () => {
-  const { id } = useParams();
+type Params = {
+  id: string;
+};
 
-  const [channel, setChannel] = useState<GetChannelResponse>();
+export const ChannelDetails: NextPage<Props> = ({ channel }) => {
+  const router = useRouter();
+
+  const id = router.query.id as string;
+
   const [chats, setChats] = useState<GetChatsResponse>([]);
   const [videos, setVideos] = useState<GetVideosResponse>([]);
-
-  useEffect(() => {
-    getChannel(id).then(setChannel);
-  }, []);
-
-  if (!channel) {
-    return <></>;
-  }
 
   const overviewItems: Readonly<PrettyTableItem>[] = [
     {
@@ -126,3 +127,12 @@ export const ChannelDetails: React.FC = () => {
     </div>
   );
 };
+
+export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
+  if (!params?.id) throw new TypeError('ID is required.');
+
+  const channel = await getChannel(params.id);
+  return { props: { channel } };
+};
+
+export default ChannelDetails;

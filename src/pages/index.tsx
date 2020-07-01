@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import { NextPage } from 'next';
+import { useState } from 'react';
 
 import { getVideos, GetVideosResponse } from '@/api/videos';
+import { VideoList } from '@/components/organisms/VideoList';
 
-import { VideoList } from '../organisms/VideoList';
+type Props = {
+  videos: GetVideosResponse;
+};
 
-export const Home: React.FC = () => {
+const Home: NextPage<Props> = () => {
   const [videos, setVideos] = useState<GetVideosResponse>([]);
 
   const handleVideoListScroll = (offset: number, limit: number): Promise<number> => {
@@ -13,6 +17,7 @@ export const Home: React.FC = () => {
       return newVideos.length;
     });
   };
+
   return (
     <>
       <div className="w-full py-16">
@@ -29,3 +34,5 @@ export const Home: React.FC = () => {
     </>
   );
 };
+
+export default Home;

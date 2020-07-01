@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import { useState } from 'react';
 import Switch from 'react-switch';
 
 type Props = {
@@ -24,8 +24,8 @@ export const Navigation: React.FC<Props> = ({ isDarkMode, onToggleTheme }) => {
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-3">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
-        <Link to="/" className="font-semibold text-xl tracking-tight">
-          Tubekids
+        <Link href="/">
+          <a className="font-semibold text-xl tracking-tight">Tubekids</a>
         </Link>
       </div>
       <div className="block lg:hidden">
@@ -50,12 +50,10 @@ export const Navigation: React.FC<Props> = ({ isDarkMode, onToggleTheme }) => {
       >
         <div className="text-sm lg:flex-grow transition">
           {links.map(({ text, to }, i) => (
-            <Link
-              key={i}
-              to={to}
-              className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4"
-            >
-              {text}
+            <Link key={i} href={to}>
+              <a className="block mt-4 lg:inline-block lg:mt-0 text-teal-200 hover:text-white mr-4">
+                {text}
+              </a>
             </Link>
           ))}
         </div>

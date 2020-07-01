@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 import { formatPurchaseAmount } from '@/lib/youtube';
 import { Channel } from '@/types/models/channel';
@@ -37,7 +36,9 @@ export const SuperChatItem: React.FC<Props> = ({
         <img src={chat.channel.imageUrl} className="rounded-full w-10 h-10 inline" />
         <div className="w-full ml-4">
           <div>
-            <Link to={`/channels/${chat.channel.channelId}`}>{chat.channel.name}</Link>
+            <Link href={`/channels/${chat.channel.channelId}`}>
+              <a>{chat.channel.name}</a>
+            </Link>
           </div>
           <div className="flex">
             <div className="w-1/3">
@@ -46,8 +47,8 @@ export const SuperChatItem: React.FC<Props> = ({
             <div className="w-full text-xs text-right">
               {showOffsetTime && <span>{chat.timestamp}</span>}
               {showDatetime && (
-                <Link to={`/videos/${chat.videoId}`}>
-                  {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD HH:mm')}
+                <Link href={`/videos/${chat.videoId}`}>
+                  <a>{dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD HH:mm')}</a>
                 </Link>
               )}
             </div>

@@ -1,30 +1,31 @@
 import dayjs from 'dayjs';
-import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import { GetServerSideProps, NextPage } from 'next';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
 
+// import styled from 'styled-components';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { getVideo, GetVideoResponse } from '@/api/videos';
+import { ExternalLink } from '@/components/atoms/ExternalLink';
+import { SuperChats } from '@/components/molecules/SuperChats';
+import { ChatViewer } from '@/components/organisms/ChatViewer';
+import { ExpandableTextView } from '@/components/organisms/ExpandableTextView';
+import { PrettyTable, PrettyTableItem } from '@/components/organisms/PrettyTable';
 
-import { ExternalLink } from '../atoms/ExternalLink';
-import { SuperChats } from '../molecules/SuperChats';
-import { ChatViewer } from '../organisms/ChatViewer';
-import { ExpandableTextView } from '../organisms/ExpandableTextView';
-import { PrettyTable, PrettyTableItem } from '../organisms/PrettyTable';
+type Props = {
+  video: GetVideoResponse;
+};
 
-export const VideoDetails: React.FC = () => {
-  const { id } = useParams();
+type Params = {
+  id: string;
+};
 
-  const [video, setVideo] = useState<GetVideoResponse>();
+export const VideoDetails: NextPage<Props, Params> = ({ video }) => {
+  const router = useRouter();
   const [chats, setChats] = useState<GetChatsResponse>([]);
 
-  useEffect(() => {
-    getVideo(id).then(setVideo);
-  }, []);
-
-  if (!video) {
-    return <></>;
-  }
+  const id = router.query.id as string;
 
   const overviewItems: Readonly<PrettyTableItem>[] = [
     {
@@ -38,8 +39,8 @@ export const VideoDetails: React.FC = () => {
     {
       title: 'Channel',
       content: (
-        <Link to={`/channels/${video.channel.channelId}`} className="link">
-          {video.channel.name}
+        <Link href={`/channels/${video.channel.channelId}`}>
+          <a className="link">{video.channel.name}</a>
         </Link>
       ),
     },
@@ -82,12 +83,18 @@ export const VideoDetails: React.FC = () => {
   return (
     <div className="max-w-screen-lg mx-auto py-8">
       <div className="sticky top-0 lg:relative lg:top-auto">
-        <YouTubeWrapper className="relative h-0">
+        <div
+          style={{
+            paddingBottom: '56.25%' /* 16:9 */,
+            height: 0,
+            position: 'relative',
+          }}
+        >
           <iframe
             className="absolute top-0 right-0 bottom-0 left-0 w-full h-full"
             src={`https://www.youtube.com/embed/${video.videoId}`}
           />
-        </YouTubeWrapper>
+        </div>
       </div>
       <div className="pl-1 pt-1">
         <h3 className="font-bold text-xl">{video.title}</h3>
@@ -112,6 +119,17 @@ export const VideoDetails: React.FC = () => {
   );
 };
 
-const YouTubeWrapper = styled.div`
-  padding-bottom: 56.25%; /* 16:9 */
-`;
+export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
+  if (!params?.id) throw new TypeError('ID is required.');
+
+  const video = await getVideo(params.id);
+  return { props: { video } };
+};
+
+// const YouTubeWrapper = styled.div`
+//   padding-bottom: 56.25%; /* 16:9 */
+//   height: 0;
+//   position: relative;
+// `;
+
+export default VideoDetails;

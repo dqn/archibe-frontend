@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
-import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { Tooltip } from 'react-tippy';
 import styled from 'styled-components';
 
@@ -52,7 +51,11 @@ export const ChatItem: React.FC<Props> = ({
     }
   });
 
-  const channelLink = <Link to={`/channels/${chat.channel.channelId}`}>{chat.channel.name}</Link>;
+  const channelLink = (
+    <Link href={`/channels/${chat.channel.channelId}`}>
+      <a>{chat.channel.name}</a>
+    </Link>
+  );
 
   return (
     <>
@@ -61,8 +64,8 @@ export const ChatItem: React.FC<Props> = ({
         {showOffsetTime && <ChatTime>{chat.timestamp}</ChatTime>}
         {showDatetime && (
           <ChatTime className="ml-2">
-            <Link to={`/videos/${chat.videoId}`}>
-              {dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD HH:mm')}
+            <Link href={`/videos/${chat.videoId}`}>
+              <a>{dayjs.unix(chat.timestampUsec / 1_000_000).format('YYYY/MM/DD HH:mm')}</a>
             </Link>
           </ChatTime>
         )}
@@ -88,7 +91,8 @@ export const ChatItem: React.FC<Props> = ({
             )}
           </span>
         )}
-        {isModerator && <img src={ModeratorIcon} className="w-5 h-5 inline" />}
+        {/* TODO: use url-loader? */}
+        {isModerator && <ModeratorIcon className="w-5 h-5 inline" />}
         {chat.badges
           .filter((badge) => badge.badgeType === 'member')
           .map((badge, j) => (
