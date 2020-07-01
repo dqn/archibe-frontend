@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import styled from 'styled-components';
@@ -15,7 +14,6 @@ export type Props = {
 
 export const VideoList: React.FC<Props> = ({ videos, onScroll, videosPerPage = 30 }) => {
   const [hasMore, setHasMore] = useState(true);
-  const router = useRouter();
 
   const loadMore = (page: number) => {
     onScroll(page * videosPerPage, videosPerPage).then((count) => {
@@ -37,18 +35,17 @@ export const VideoList: React.FC<Props> = ({ videos, onScroll, videosPerPage = 3
       <div className="flex flex-wrap">
         {videos.map((video, i) => (
           <div key={i} className="w-full lg:w-1/4 flex flex-wrap lg:px-2 mb-2">
-            <div
-              className="w-1/2 lg:w-full relative cursor-pointer"
-              onClick={() => router.push(`/videos/${video.videoId}`)}
-            >
-              <img src={video.thumbnailUrl} />
-              <div className="opacity-75 bg-black text-xs text-white absolute right-0 bottom-0 px-1 m-1 rounded">
-                {dayjs()
-                  .startOf('day')
-                  .add(video.lengthSeconds, 's')
-                  .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'H:mm:ss')}
-              </div>
-            </div>
+            <Link href={`/videos/${video.videoId}`}>
+              <a className="w-1/2 lg:w-full relative cursor-pointer">
+                <img src={video.thumbnailUrl} />
+                <div className="opacity-75 bg-black text-xs text-white absolute right-0 bottom-0 px-1 m-1 rounded">
+                  {dayjs()
+                    .startOf('day')
+                    .add(video.lengthSeconds, 's')
+                    .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'H:mm:ss')}
+                </div>
+              </a>
+            </Link>
             <div className="w-1/2 lg:w-full pl-1 lg:pl-0 text-sm">
               <Link href={`/videos/${video.videoId}`}>
                 <VideoTitle>{video.title}</VideoTitle>
