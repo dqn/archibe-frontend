@@ -1,4 +1,3 @@
-import React from 'react';
 import { Tooltip } from 'react-tippy';
 import styled from 'styled-components';
 

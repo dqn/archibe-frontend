@@ -1,7 +1,7 @@
 import '../styles.css';
 
 import { AppProps } from 'next/app';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { Navigation } from '@/components/templetes/Navigation';

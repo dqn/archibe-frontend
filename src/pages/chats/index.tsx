@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import { getChats, GetChatsParams, GetChatsResponse } from '@/api/chats';
 import { ChatViewer } from '@/components/organisms/ChatViewer';

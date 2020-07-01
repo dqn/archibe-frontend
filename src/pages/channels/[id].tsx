@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Tooltip } from 'react-tippy';
 
 import { getChannel, GetChannelResponse } from '@/api/channels';

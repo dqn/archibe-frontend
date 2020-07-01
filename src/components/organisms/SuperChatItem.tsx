@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import React from 'react';
 
 import { formatPurchaseAmount } from '@/lib/youtube';
 import { Channel } from '@/types/models/channel';

@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import React from 'react';
 import { Tooltip } from 'react-tippy';
 import styled from 'styled-components';
 

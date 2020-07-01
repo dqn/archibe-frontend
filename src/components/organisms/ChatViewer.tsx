@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
 import { GetChatsResponse } from '@/api/chats';

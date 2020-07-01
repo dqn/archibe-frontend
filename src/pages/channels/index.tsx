@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Tooltip } from 'react-tippy';
 

@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 // import styled from 'styled-components';
 import { getChats, GetChatsResponse } from '@/api/chats';

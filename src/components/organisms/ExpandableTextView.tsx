@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Linkify from 'react-linkify';
 
 import { ExternalLink } from '../atoms/ExternalLink';

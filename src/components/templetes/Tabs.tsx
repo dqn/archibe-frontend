@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 type Props = {
   tabs: { name: string; content: JSX.Element }[];
