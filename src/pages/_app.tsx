@@ -2,21 +2,23 @@ import '@/styles.css';
 import 'react-tippy/dist/tippy.css';
 
 import { AppProps } from 'next/app';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
 import { Navigation } from '@/components/templetes/Navigation';
 import { AppTheme, darkTheme, lightTheme } from '@/lib/theme';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  // const themeLocalStorageKey = 'tubekids-theme';
-  const [isDarkMode, setIsDarkMode] = useState(
-    // localStorage.getItem(themeLocalStorageKey) === 'dark',
-    true,
-  );
+  const themeKey = 'tubekids-theme';
+
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    setIsDarkMode(localStorage.getItem(themeKey) === 'dark');
+  }, []);
 
   const handleToggleTheme = (checked: boolean) => {
-    // localStorage.setItem(themeLocalStorageKey, checked ? 'dark' : 'light');
+    localStorage.setItem(themeKey, checked ? 'dark' : 'light');
     setIsDarkMode(checked);
   };
 
@@ -38,7 +40,6 @@ const GlobalStyles = createGlobalStyle<{ theme: AppTheme }>`
 body {
   color: ${({ theme }) => theme.color};
   background-color: ${({ theme }) => theme.bg};
-  transition: background-color 0.15s linear;
 }
 
 input {
