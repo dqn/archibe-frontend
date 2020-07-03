@@ -3,8 +3,8 @@ import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import styled from 'styled-components';
 
-// import styled from 'styled-components';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { getVideo, GetVideoResponse } from '@/api/videos';
 import { ExternalLink } from '@/components/atoms/ExternalLink';
@@ -83,18 +83,12 @@ export const VideoDetails: NextPage<Props, Params> = ({ video }) => {
   return (
     <div className="max-w-screen-lg mx-auto py-8">
       <div className="sticky top-0 lg:relative lg:top-auto">
-        <div
-          style={{
-            paddingBottom: '56.25%' /* 16:9 */,
-            height: 0,
-            position: 'relative',
-          }}
-        >
+        <YouTubeWrapper>
           <iframe
             className="absolute top-0 right-0 bottom-0 left-0 w-full h-full"
             src={`https://www.youtube.com/embed/${video.videoId}`}
           />
-        </div>
+        </YouTubeWrapper>
       </div>
       <div className="pl-1 pt-1">
         <h3 className="font-bold text-xl">{video.title}</h3>
@@ -126,10 +120,10 @@ export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ pa
   return { props: { video } };
 };
 
-// const YouTubeWrapper = styled.div`
-//   padding-bottom: 56.25%; /* 16:9 */
-//   height: 0;
-//   position: relative;
-// `;
+const YouTubeWrapper = styled.div`
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  position: relative;
+`;
 
 export default VideoDetails;
