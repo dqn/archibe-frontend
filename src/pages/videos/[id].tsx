@@ -31,13 +31,17 @@ export const VideoDetails: NextPage<Props, Params> = ({ video }) => {
     {
       title: 'Video ID',
       content: (
-        <ExternalLink href={`https://www.youtube.com/watch?v=${video.videoId}`}>
-          {video.videoId}
-        </ExternalLink>
+        <>
+          <span>{video.videoId}</span> (
+          <ExternalLink href={`https://www.youtube.com/watch?v=${video.videoId}`}>
+            YouTube
+          </ExternalLink>
+          )
+        </>
       ),
     },
     {
-      title: 'Channel',
+      title: 'チャンネル',
       content: (
         <Link href={`/channels/${video.channel.channelId}`}>
           <a className="link">{video.channel.name}</a>
@@ -45,31 +49,23 @@ export const VideoDetails: NextPage<Props, Params> = ({ video }) => {
       ),
     },
     {
-      title: 'Live started at',
+      title: '配信開始日時',
       content: dayjs(video.liveStartedAt).format('YYYY/MM/DD HH:mm:ss'),
     },
     {
-      title: 'Live ended at',
+      title: '配信終了日時',
       content: dayjs(video.liveEndedAt).format('YYYY/MM/DD HH:mm:ss'),
     },
     {
-      title: 'Length',
+      title: '配信時間',
       content: dayjs()
         .startOf('day')
         .add(video.lengthSeconds, 's')
         .format(video.lengthSeconds < 3600 ? 'mm:ss' : 'H:mm:ss'),
     },
     {
-      title: 'Super Chat amount',
+      title: 'スーパーチャット',
       content: <SuperChats superChats={video.receivedSuperChats} />,
-    },
-    {
-      title: 'Private',
-      content: video.isPrivate ? 'private' : 'public',
-    },
-    {
-      title: 'Updated at',
-      content: dayjs(video.updatedAt).format('YYYY/MM/DD HH:mm:ss'),
     },
   ];
 
@@ -97,11 +93,9 @@ export const VideoDetails: NextPage<Props, Params> = ({ video }) => {
         </div>
       </div>
       <div className="w-full pt-4">
-        <span className="font-bold text-md ml-1">Overview</span>
         <PrettyTable items={overviewItems} />
       </div>
       <div className="pt-4">
-        <span className="font-bold text-md ml-1">Chats</span>
         <ChatViewer
           chats={chats}
           onScroll={handleChatViewerScroll}

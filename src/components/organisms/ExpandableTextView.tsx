@@ -26,9 +26,9 @@ export const ExpandableTextView: React.FC<Props> = ({ text, expanded = false }) 
       <div className={isExpanded ? 'whitespace-pre-line' : 'truncate'}>
         <Linkify componentDecorator={componentDecorator}>{preprocess(text)}</Linkify>
       </div>
-      <div className="mt-3">
+      <div className="mt-6">
         <a onClick={() => setIsExpanded(!isExpanded)} className="link cursor-pointer">
-          {isExpanded ? 'show less' : 'show more'}
+          {isExpanded ? '一部を表示' : 'もっと見る'}
         </a>
       </div>
     </>
