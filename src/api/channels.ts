@@ -19,10 +19,10 @@ export type GetChannelResponse = Channel & {
   videos: Video[];
 };
 
-export async function getChannels(params: GetChannelsParams = {}): Promise<GetChannelsResponse> {
-  return (await client.get('/api/channels', { params })).data;
+export function getChannels(params: GetChannelsParams = {}): Promise<GetChannelsResponse> {
+  return client.get('/api/channels', { params });
 }
 
-export async function getChannel(channelId: string): Promise<GetChannelResponse> {
-  return (await client.get(`/api/channels/${channelId}`)).data;
+export function getChannel(channelId: string): Promise<GetChannelResponse> {
+  return client.get(`/api/channels/${channelId}`);
 }

@@ -20,6 +20,6 @@ export type GetChatsResponse = (Chat & {
   badges: Badge[];
 })[];
 
-export async function getChats(params: GetChatsParams = {}): Promise<GetChatsResponse> {
-  return (await client.get('/api/chats', { params })).data;
+export function getChats(params: GetChatsParams = {}): Promise<GetChatsResponse> {
+  return client.get('/api/chats', { params });
 }

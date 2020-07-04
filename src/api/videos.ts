@@ -15,14 +15,14 @@ export type GetVideosResponse = (Video & {
   channel: Channel;
 })[];
 
-export async function getVideos(params: GetVideosParams = {}): Promise<GetVideosResponse> {
-  return (await client.get('/api/videos', { params })).data;
+export function getVideos(params: GetVideosParams = {}): Promise<GetVideosResponse> {
+  return client.get('/api/videos', { params });
 }
 
 export type GetVideoResponse = Video & {
   channel: Channel;
 };
 
-export async function getVideo(videoId: string): Promise<GetVideoResponse> {
-  return (await client.get(`/api/videos/${videoId}`)).data;
+export function getVideo(videoId: string): Promise<GetVideoResponse> {
+  return client.get(`/api/videos/${videoId}`);
 }

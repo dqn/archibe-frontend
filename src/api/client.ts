@@ -6,3 +6,5 @@ export const client = applyCaseMiddleware(
     baseURL: process.env.NODE_ENV !== 'production' ? 'http://localhost:4000' : 'TODO',
   }),
 );
+
+client.interceptors.response.use((response) => response.data);
