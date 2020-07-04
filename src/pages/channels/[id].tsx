@@ -1,4 +1,3 @@
-import dayjs from 'dayjs';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -33,32 +32,32 @@ export const ChannelDetails: NextPage<Props> = ({ channel }) => {
 
   const overviewItems: Readonly<PrettyTableItem>[] = [
     {
-      title: 'Channel',
+      title: 'Channel ID',
       content: (
-        <ExternalLink href={`https://www.youtube.com/channel/${channel.channelId}`}>
-          YouTube
-        </ExternalLink>
+        <>
+          <span>{channel.channelId}</span> (
+          <ExternalLink href={`https://www.youtube.com/channel/${channel.channelId}`}>
+            YouTube
+          </ExternalLink>
+          )
+        </>
       ),
     },
     {
-      title: 'Sent chats',
+      title: '送信チャット数',
       content: channel.sentChatCount,
     },
     {
-      title: 'Recieved chats',
+      title: '受信チャット数',
       content: channel.receivedChatCount,
     },
     {
-      title: 'Sent Super Chat amount',
+      title: '送信金額',
       content: <SuperChats superChats={channel.sentSuperChats} />,
     },
     {
-      title: 'Received Super Chat amount',
+      title: '受信金額',
       content: <SuperChats superChats={channel.receivedSuperChats} />,
-    },
-    {
-      title: 'Updated at',
-      content: dayjs(channel.updatedAt).format('YYYY/MM/DD HH:mm:ss'),
     },
   ];
 
@@ -100,14 +99,13 @@ export const ChannelDetails: NextPage<Props> = ({ channel }) => {
       </div>
       <div className="flex flex-wrap mt-5">
         <div className="w-full">
-          <span className="font-bold text-md ml-1">Overview</span>
           <PrettyTable items={overviewItems} />
         </div>
       </div>
       <Tabs
         tabs={[
           {
-            name: 'CHATS',
+            name: 'チャット',
             content: (
               <div className="mt-2">
                 <ChatViewer chats={chats} onScroll={handleChatViewerScroll} showDatetime />
@@ -115,7 +113,7 @@ export const ChannelDetails: NextPage<Props> = ({ channel }) => {
             ),
           },
           {
-            name: 'VIDEOS',
+            name: '動画',
             content: (
               <div className="mt-4">
                 <VideoList videos={videos} onScroll={handleVideoListScroll} />
