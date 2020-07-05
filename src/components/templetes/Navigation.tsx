@@ -25,7 +25,7 @@ export const Navigation: React.FC<Props> = ({ isDarkMode, onToggleTheme }) => {
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-3">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <Link href="/">
-          <a className="font-semibold text-xl tracking-tight">Tubekids</a>
+          <a className="font-semibold text-xl tracking-tight">Archibe</a>
         </Link>
       </div>
       <div className="block lg:hidden">

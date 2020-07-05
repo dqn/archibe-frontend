@@ -9,7 +9,7 @@ import { Navigation } from '@/components/templetes/Navigation';
 import { AppTheme, darkTheme, lightTheme } from '@/lib/theme';
 
 const App: React.FC<AppProps> = ({ Component, pageProps }) => {
-  const themeKey = 'tubekids-theme';
+  const themeKey = 'archibe-theme';
 
   const [isDarkMode, setIsDarkMode] = useState(false);
 

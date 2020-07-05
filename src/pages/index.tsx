@@ -22,8 +22,8 @@ const Home: NextPage<Props> = () => {
     <>
       <div className="w-full py-16">
         <div className="text-center">
-          <h1 className="text-4xl font-bold">Tubekids</h1>
-          <span>YouTube Live archives aggregation</span>
+          <h1 className="text-4xl font-bold">Archibe</h1>
+          <span>Archibe web app for summarizing and browsing YouTube Live archives</span>
         </div>
       </div>
       <div className="max-w-screen-lg mx-auto">
