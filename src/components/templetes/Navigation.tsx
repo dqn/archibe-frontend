@@ -22,7 +22,7 @@ export const Navigation: React.FC<Props> = ({ isDarkMode, onToggleTheme }) => {
   ] as const;
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-3">
+    <nav className="flex items-center justify-between flex-wrap bg-red-700 p-3">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <Link href="/">
           <a className="font-semibold text-xl tracking-tight">Archibe</a>

@@ -47,7 +47,7 @@ input {
 }
 
 .link {
-  color: #56b3b4;
+  color: #c53030;
 }
 `;
 
