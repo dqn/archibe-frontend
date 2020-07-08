@@ -27,7 +27,11 @@ export const Tabs: React.FC<Props> = ({ tabs, defaultTabName }) => {
           </div>
         ))}
       </div>
-      <div className="tabcontent">{tabs.find((it) => it.name === tab)!.content}</div>
+      <div className="tabcontent">
+        {tabs.map((it) => (
+          <div className={it.name === tab ? '' : 'hidden'}>{it.content}</div>
+        ))}
+      </div>
     </>
   );
 };
