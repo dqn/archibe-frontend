@@ -3,17 +3,16 @@
 const express = require('express');
 const next = require('next');
 
-const devProxy = {
+const config = {
   '/api': {
-    target: 'http://localhost:3000/',
+    target: 'http://localhost:4000/',
     changeOrigin: true,
   },
 };
 
-const port = parseInt(process.env.PORT, 10) || 4000;
+const port = parseInt(process.env.PORT, 10) || 3000;
 const env = process.env.NODE_ENV;
-const dev = env !== 'production';
-const app = next({ dir: '.', dev });
+const app = next({ dir: '.', dev: env !== 'production' });
 
 const handle = app.getRequestHandler();
 
@@ -23,12 +22,10 @@ app
   .then(() => {
     server = express();
 
-    if (dev && devProxy) {
-      const { createProxyMiddleware } = require('http-proxy-middleware');
-      Object.keys(devProxy).forEach((context) => {
-        server.use(createProxyMiddleware(context, devProxy[context]));
-      });
-    }
+    const { createProxyMiddleware } = require('http-proxy-middleware');
+    Object.keys(config).forEach((context) => {
+      server.use(createProxyMiddleware(context, config[context]));
+    });
 
     server.all('*', (req, res) => handle(req, res));
 

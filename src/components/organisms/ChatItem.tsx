@@ -91,7 +91,6 @@ export const ChatItem: React.FC<Props> = ({
             )}
           </span>
         )}
-        {/* TODO: use url-loader? */}
         {isModerator && <ModeratorIcon className="w-5 h-5 inline" />}
         {chat.badges
           .filter((badge) => badge.badgeType === 'member')
