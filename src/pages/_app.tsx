@@ -25,8 +25,10 @@ const App: React.FC<AppProps> = ({ Component, pageProps }) => {
   return (
     <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
       <GlobalStyles />
-      <Navigation isDarkMode={isDarkMode} onToggleTheme={handleToggleTheme} />
-      <Component {...pageProps} />
+      <div className="font-sans">
+        <Navigation isDarkMode={isDarkMode} onToggleTheme={handleToggleTheme} />
+        <Component {...pageProps} />
+      </div>
     </ThemeProvider>
   );
 };
