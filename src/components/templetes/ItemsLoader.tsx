@@ -6,6 +6,7 @@ export type Props = {
 };
 
 export const ItemsLoader: React.FC<Props> = ({ children, onClickLoadMore, itemsPerPage = 30 }) => {
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [page, setPage] = useState(0);
   const [hasMore, setHasMore] = useState(true);
 
@@ -16,7 +17,8 @@ export const ItemsLoader: React.FC<Props> = ({ children, onClickLoadMore, itemsP
     });
   };
 
-  if (!page) {
+  if (isInitialLoad) {
+    setIsInitialLoad(false);
     loadMore();
   }
 
@@ -26,7 +28,7 @@ export const ItemsLoader: React.FC<Props> = ({ children, onClickLoadMore, itemsP
       {hasMore && page && (
         <div className="text-center py-5">
           <button
-            onClick={loadMore}
+            onClick={() => setTimeout(loadMore, 0)}
             className="bg-gray-400 rounded-full text-sm text-black font-bold p-3"
           >
             さらに読み込む
