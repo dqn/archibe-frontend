@@ -1,8 +1,6 @@
-import { useState } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
-
 import { GetChatsResponse } from '@/api/chats';
 
+import { ItemsLoader } from '../templetes/ItemsLoader';
 import { ChatItem } from './ChatItem';
 import { SuperChatItem } from './SuperChatItem';
 
@@ -23,28 +21,11 @@ export const ChatViewer: React.FC<Props> = ({
   showOffsetTime = false,
   showDatetime = false,
 }) => {
-  const [hasMore, setHasMore] = useState(true);
-
-  const loadMore = (page: number) => {
-    onScroll(page * chatsPerPage, chatsPerPage).then((count) => {
-      !count && setHasMore(false);
-    });
-  };
-
   return (
-    <ul className="text-sm">
-      <InfiniteScroll
-        pageStart={-1}
-        loadMore={loadMore}
-        hasMore={hasMore}
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
-        }
-      >
+    <div className="text-sm">
+      <ItemsLoader onClickLoadMore={onScroll} itemsPerPage={chatsPerPage}>
         {chats.map((chat, i) => (
-          <li key={i} className="py-2 mx-2 my-auto flex">
+          <div key={i} className="py-2 mx-2 my-auto flex">
             {chat.type === 'chat' ? (
               <ChatItem
                 chat={chat}
@@ -59,9 +40,9 @@ export const ChatViewer: React.FC<Props> = ({
                 showDatetime={showDatetime}
               />
             )}
-          </li>
+          </div>
         ))}
-      </InfiniteScroll>
-    </ul>
+      </ItemsLoader>
+    </div>
   );
 };

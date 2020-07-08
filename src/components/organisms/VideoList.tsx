@@ -1,10 +1,10 @@
 import dayjs from 'dayjs';
 import Link from 'next/link';
-import { useState } from 'react';
-import InfiniteScroll from 'react-infinite-scroller';
 import styled from 'styled-components';
 
 import { GetVideosResponse } from '@/api/videos';
+
+import { ItemsLoader } from '../templetes/ItemsLoader';
 
 export type Props = {
   videos: GetVideosResponse;
@@ -13,25 +13,8 @@ export type Props = {
 };
 
 export const VideoList: React.FC<Props> = ({ videos, onScroll, videosPerPage = 30 }) => {
-  const [hasMore, setHasMore] = useState(true);
-
-  const loadMore = (page: number) => {
-    onScroll(page * videosPerPage, videosPerPage).then((count) => {
-      !count && setHasMore(false);
-    });
-  };
-
   return (
-    <InfiniteScroll
-      pageStart={-1}
-      loadMore={loadMore}
-      hasMore={hasMore}
-      loader={
-        <div className="loader" key={0}>
-          Loading ...
-        </div>
-      }
-    >
+    <ItemsLoader onClickLoadMore={onScroll} itemsPerPage={videosPerPage}>
       <div className="flex flex-wrap">
         {videos.map((video, i) => (
           <div key={i} className="w-full lg:w-1/4 flex flex-wrap lg:px-2 mb-2">
@@ -55,7 +38,7 @@ export const VideoList: React.FC<Props> = ({ videos, onScroll, videosPerPage = 3
           </div>
         ))}
       </div>
-    </InfiniteScroll>
+    </ItemsLoader>
   );
 };
 
