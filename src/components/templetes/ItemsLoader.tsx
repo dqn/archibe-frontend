@@ -25,7 +25,7 @@ export const ItemsLoader: React.FC<Props> = ({ children, onClickLoadMore, itemsP
   return (
     <>
       {children}
-      {hasMore && page && (
+      {hasMore && !!page && (
         <div className="text-center py-5">
           <button
             onClick={() => setTimeout(loadMore, 0)}
