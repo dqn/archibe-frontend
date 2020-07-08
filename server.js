@@ -5,7 +5,7 @@ const next = require('next');
 
 const config = {
   '/api': {
-    target: 'http://localhost:4000/',
+    target: process.env.ENDPOINT ?? 'http://localhost:4000/',
     changeOrigin: true,
   },
 };
