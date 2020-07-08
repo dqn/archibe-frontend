@@ -16,7 +16,7 @@ export type Props = {
 export const ChatViewer: React.FC<Props> = ({
   chats,
   onScroll,
-  chatsPerPage = 30,
+  chatsPerPage = 100,
   showChannelName = false,
   showOffsetTime = false,
   showDatetime = false,
