@@ -50,7 +50,7 @@ export const VideoList: React.FC<Props> = ({ videos, onScroll, videosPerPage = 3
               <Link href={`/videos/${video.videoId}`}>
                 <VideoTitle>{video.title}</VideoTitle>
               </Link>
-              <div className="mt-1">{dayjs(video.liveStartedAt).format('YYYY/MM/DD')}</div>
+              <div className="mt-1">{dayjs(video.publishDate).format('YYYY/MM/DD')}</div>
             </div>
           </div>
         ))}
