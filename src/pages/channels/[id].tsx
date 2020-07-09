@@ -1,9 +1,9 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Tooltip } from 'react-tippy';
 
-import { getChannel, GetChannelResponse } from '@/api/channels';
+import { getChannel, GetChannelResponse, getChannels, GetChannelsResponse } from '@/api/channels';
 import { getChats, GetChatsResponse } from '@/api/chats';
 import { getVideos, GetVideosResponse } from '@/api/videos';
 import { ExternalLink } from '@/components/atoms/ExternalLink';
@@ -126,7 +126,26 @@ export const ChannelDetails: NextPage<Props> = ({ channel }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const size = 1000;
+  let page = 0;
+  const channels: GetChannelsResponse = [];
+
+  while (true) {
+    const data = await getChannels({ offset: size * page, limit: size });
+    if (!data.length) {
+      break;
+    }
+
+    channels.push(...data);
+    page++;
+  }
+
+  const paths = channels.map((channel) => `/channels/${channel.channelId}`);
+  return { paths, fallback: false };
+};
+
+export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
   if (!params?.id) throw new TypeError('ID is required.');
 
   const channel = await getChannel(params.id);
