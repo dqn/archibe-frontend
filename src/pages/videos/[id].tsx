@@ -1,12 +1,12 @@
 import dayjs from 'dayjs';
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 import { getChats, GetChatsResponse } from '@/api/chats';
-import { getVideo, GetVideoResponse, getVideos, GetVideosResponse } from '@/api/videos';
+import { getVideo, GetVideoResponse } from '@/api/videos';
 import { ExternalLink } from '@/components/atoms/ExternalLink';
 import { SuperChats } from '@/components/molecules/SuperChats';
 import { ChatViewer } from '@/components/organisms/ChatViewer';
@@ -107,26 +107,7 @@ export const VideoDetails: NextPage<Props, Params> = ({ video }) => {
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const size = 1000;
-  let page = 0;
-  const videos: GetVideosResponse = [];
-
-  while (true) {
-    const data = await getVideos({ offset: size * page, limit: size });
-    if (!data.length) {
-      break;
-    }
-
-    videos.push(...data);
-    page++;
-  }
-
-  const paths = videos.map((video) => `/videos/${video.videoId}`);
-  return { paths, fallback: false };
-};
-
-export const getStaticProps: GetStaticProps<Props, Params> = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<Props, Params> = async ({ params }) => {
   if (!params?.id) throw new TypeError('ID is required.');
 
   const video = await getVideo(params.id);
