@@ -31,7 +31,7 @@
     "@types/react-linkify": "1.0.0",
     "@types/styled-components": "5.1.4",
     "cssnano": "4.1.10",
-    "http-proxy-middleware": "1.0.5",
+    "http-proxy-middleware": "1.0.6",
     "postcss-cli": "8.1.0",
     "postcss-flexbugs-fixes": "4.2.1",
     "postcss-preset-env": "6.7.0",
