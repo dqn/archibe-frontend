@@ -9,7 +9,7 @@
     "start": "NODE_ENV=production next start"
   },
   "dependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "axios-case-converter": "^0.6.0",
     "dayjs": "^1.8.28",
     "express": "^4.17.1",
