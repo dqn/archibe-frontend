@@ -12,7 +12,7 @@
     "axios": "^0.21.2",
     "axios-case-converter": "^0.6.0",
     "dayjs": "^1.8.28",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "next": "^12.1.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
